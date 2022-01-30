@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'authentication/auth_repository.dart';
-import 'authentication/login/view/login_view.dart';
+import 'authentication/signup/view/signup_view.dart';
 import 'utils/storage_repository.dart';
 
 Future<void> main() async {
@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData.dark(),
-        home: const LoginView(),
+        home: const SignupView(),
       ),
     );
   }

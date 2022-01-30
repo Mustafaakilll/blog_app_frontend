@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../utils/form_status.dart';
-import '../login_bloc.dart';
+import '../signup_bloc.dart';
 
-class LoginForm extends StatelessWidget {
-  const LoginForm({Key? key}) : super(key: key);
+class SignupForm extends StatelessWidget {
+  const SignupForm({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<LoginBloc, LoginState>(
+    return BlocListener<SignupBloc, SignupState>(
       listener: (context, state) {
         final formStatus = state.formStatus;
         if (formStatus is SubmissionFailure) {
@@ -26,6 +26,7 @@ class LoginForm extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: const <Widget>[
             _EmailInput(),
+            _UsernameInput(),
             _PasswordInput(),
             _LoginButton(),
           ],
@@ -40,12 +41,29 @@ class _EmailInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<LoginBloc, LoginState>(
+    return BlocBuilder<SignupBloc, SignupState>(
       buildWhen: (previous, current) => previous.email != current.email,
       builder: (context, state) {
         return TextField(
-          onChanged: (value) => context.read<LoginBloc>().add(EmailChanged(email: value)),
+          onChanged: (value) => context.read<SignupBloc>().add(SignupEmailChanged(email: value)),
           decoration: const InputDecoration(labelText: 'email'),
+        );
+      },
+    );
+  }
+}
+
+class _UsernameInput extends StatelessWidget {
+  const _UsernameInput({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<SignupBloc, SignupState>(
+      buildWhen: (previous, current) => previous.username != current.username,
+      builder: (context, state) {
+        return TextField(
+          onChanged: (value) => context.read<SignupBloc>().add(SignupUsernameChanged(username: value)),
+          decoration: const InputDecoration(labelText: 'username'),
         );
       },
     );
@@ -57,11 +75,11 @@ class _PasswordInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<LoginBloc, LoginState>(
+    return BlocBuilder<SignupBloc, SignupState>(
       buildWhen: (previous, current) => previous.password != current.password,
       builder: (context, state) {
         return TextField(
-          onChanged: (value) => context.read<LoginBloc>().add(PasswordChanged(password: value)),
+          onChanged: (value) => context.read<SignupBloc>().add(SignupPasswordChanged(password: value)),
           decoration: const InputDecoration(labelText: 'password'),
           obscureText: true,
         );
@@ -75,13 +93,13 @@ class _LoginButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<LoginBloc, LoginState>(
+    return BlocBuilder<SignupBloc, SignupState>(
       buildWhen: (previous, current) => previous.formStatus != current.formStatus,
       builder: (context, state) {
         return state.formStatus == const FormSubmitting()
             ? const CircularProgressIndicator()
             : ElevatedButton(
-                onPressed: () => context.read<LoginBloc>().add(const LoginFormSubmitted()),
+                onPressed: () => context.read<SignupBloc>().add(const SignupFormSubmitted()),
                 child: const Text('Submit'),
               );
       },
