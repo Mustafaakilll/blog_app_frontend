@@ -1,22 +1,14 @@
 import 'package:hive_flutter/hive_flutter.dart';
 
 abstract class IStorageRepository {
-  void init();
   Future<dynamic> getData(String boxName, String key);
-  Future<void> setData(String boxName, String key, String value);
+  Future<void> setData(String boxName, String key, dynamic value);
 }
 
 class StorageRepository extends IStorageRepository {
-  StorageRepository() {
-    init();
-  }
+  StorageRepository();
 
   late final _hive = Hive;
-
-  @override
-  void init() {
-    _hive.initFlutter();
-  }
 
   @override
   Future<dynamic> getData(String boxName, String key) async {
