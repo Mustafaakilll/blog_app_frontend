@@ -24,6 +24,8 @@ class AuthRepository {
           user[key] = value;
         }
       });
+      user['password'] = credentials.password;
+
       await storageRepo.setData('auth', 'token', token);
       await storageRepo.setData('auth', 'user', user);
     } on DioError catch (e) {
@@ -48,6 +50,8 @@ class AuthRepository {
           user[key] = value;
         }
       });
+      user['password'] = credentials.password;
+
       await storageRepo.setData('auth', 'token', token);
       await storageRepo.setData('auth', 'user', user);
     } on DioError catch (e) {
@@ -55,6 +59,15 @@ class AuthRepository {
           ? e.response?.data['message'].first
           : e.response?.data['message'];
       throw Exception(errorMessage);
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  Future<void> attemptAutoLogin() async {
+    final user = await storageRepo.getData('auth', 'user');
+    try {
+      login(LoginModel(email: user['email'], password: user['password']));
     } catch (e) {
       throw Exception(e);
     }
