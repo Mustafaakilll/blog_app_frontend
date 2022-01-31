@@ -8,10 +8,14 @@ import 'login_form.dart';
 class LoginView extends StatelessWidget {
   const LoginView({Key? key}) : super(key: key);
 
+  static Route route() {
+    return MaterialPageRoute(builder: (_) => const LoginView());
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('login')),
+      appBar: AppBar(title: const Text('Log In')),
       body: BlocProvider<LoginBloc>(
         create: (context) => LoginBloc(authRepository: context.read<AuthRepository>()),
         child: const LoginForm(),

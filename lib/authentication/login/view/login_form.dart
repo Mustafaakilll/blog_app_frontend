@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../utils/constants.dart';
 import '../../../utils/form_status.dart';
+import '../../signup/view/signup_view.dart';
 import '../login_bloc.dart';
 
 class LoginForm extends StatelessWidget {
@@ -28,6 +30,7 @@ class LoginForm extends StatelessWidget {
             _EmailInput(),
             _PasswordInput(),
             _LoginButton(),
+            _SignupButton(),
           ],
         ),
       ),
@@ -85,6 +88,18 @@ class _LoginButton extends StatelessWidget {
                 child: const Text('Submit'),
               );
       },
+    );
+  }
+}
+
+class _SignupButton extends StatelessWidget {
+  const _SignupButton({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+      onPressed: () => AppConstants.navKey.currentState?.push(SignupView.route()),
+      child: const Text('Dont have an account? Sign up now'),
     );
   }
 }
