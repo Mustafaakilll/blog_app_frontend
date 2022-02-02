@@ -28,4 +28,9 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
   void showHome() {
     emit(Authenticated());
   }
+
+  void logOut() {
+    authRepository.logOut();
+    emit(Unauthenticated());
+  }
 }

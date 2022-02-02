@@ -65,9 +65,22 @@ class AuthRepository {
   }
 
   Future<void> attemptAutoLogin() async {
-    final user = await storageRepo.getData('auth', 'user');
+    final user = await storageRepo.getData<Map>('auth', 'user');
+    if (user.isNotEmpty) {
+      try {
+        final credentials = LoginModel(email: user['email'], password: user['password']);
+        await login(credentials);
+      } catch (e) {
+        throw Exception(e);
+      }
+    } else {
+      throw Exception('User not found');
+    }
+  }
+
+  Future<void> logOut() async {
     try {
-      login(LoginModel(email: user['email'], password: user['password']));
+      await storageRepo.clearData('auth');
     } catch (e) {
       throw Exception(e);
     }

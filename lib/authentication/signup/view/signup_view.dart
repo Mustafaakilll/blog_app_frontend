@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../auth_flow/authentication_cubit.dart';
 import '../../auth_repository.dart';
 import '../signup_bloc.dart';
 import 'signup_form.dart';
@@ -17,7 +18,10 @@ class SignupView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('Sign Up')),
       body: BlocProvider<SignupBloc>(
-        create: (context) => SignupBloc(authRepository: context.read<AuthRepository>()),
+        create: (context) => SignupBloc(
+          authRepository: context.read<AuthRepository>(),
+          authenticationCubit: context.read<AuthenticationCubit>(),
+        ),
         child: const SignupForm(),
       ),
     );

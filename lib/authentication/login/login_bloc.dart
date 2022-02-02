@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
 import '../../utils/form_status.dart';
+import '../auth_flow/authentication_cubit.dart';
 import '../auth_repository.dart';
 import 'model/login_model.dart';
 
@@ -9,13 +10,14 @@ part 'login_event.dart';
 part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  LoginBloc({required this.authRepository}) : super(const LoginState()) {
+  LoginBloc({required this.authenticationCubit, required this.authRepository}) : super(const LoginState()) {
     on<EmailChanged>(_onEmailChanged);
     on<PasswordChanged>(_onPasswordChanged);
     on<LoginFormSubmitted>(_onFormSubmitted);
   }
 
   final AuthRepository authRepository;
+  final AuthenticationCubit authenticationCubit;
 
   void _onEmailChanged(EmailChanged event, Emitter<LoginState> emit) {
     emit(state.copyWith(email: event.email));
@@ -30,6 +32,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     try {
       await authRepository.login(LoginModel(email: state.email, password: state.password));
       emit(state.copyWith(formStatus: const SubmissionSuccess()));
+      authenticationCubit.showHome();
     } on Exception catch (e) {
       emit(state.copyWith(formStatus: SubmissionFailure(exception: e.toString())));
     }

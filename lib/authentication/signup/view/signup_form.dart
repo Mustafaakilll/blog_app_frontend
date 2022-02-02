@@ -28,7 +28,7 @@ class SignupForm extends StatelessWidget {
             _EmailInput(),
             _UsernameInput(),
             _PasswordInput(),
-            _LoginButton(),
+            _SignupButton(),
           ],
         ),
       ),
@@ -88,8 +88,8 @@ class _PasswordInput extends StatelessWidget {
   }
 }
 
-class _LoginButton extends StatelessWidget {
-  const _LoginButton({Key? key}) : super(key: key);
+class _SignupButton extends StatelessWidget {
+  const _SignupButton({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
