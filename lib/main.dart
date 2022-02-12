@@ -8,6 +8,7 @@ import 'authentication/auth_repository.dart';
 import 'authentication/login/view/login_view.dart';
 import 'session/navigator/session_navigator.dart';
 import 'session/navigator/session_navigator_cubit.dart';
+import 'session/user_repository.dart';
 import 'splash/splash_view.dart';
 import 'utils/constants.dart';
 import 'utils/storage_repository.dart';
@@ -26,13 +27,13 @@ class MyApp extends StatelessWidget {
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider(create: (context) => StorageRepository()),
+        RepositoryProvider(create: (context) => UserRepository(context.read<StorageRepository>())),
         RepositoryProvider(create: (context) => AuthRepository(storageRepo: context.read<StorageRepository>())),
       ],
       child: MultiBlocProvider(
         providers: [
           BlocProvider<AuthenticationCubit>(
-            create: (context) => AuthenticationCubit(authRepository: context.read<AuthRepository>()),
-          ),
+              create: (context) => AuthenticationCubit(authRepository: context.read<AuthRepository>())),
           BlocProvider<SessionNavigatorCubit>(create: (context) => SessionNavigatorCubit()),
         ],
         child: MaterialApp(
