@@ -15,19 +15,12 @@ class AuthRepository {
   Future<void> login(LoginModel credentials) async {
     try {
       final request = await _dio.post('$authApi/login', data: credentials.toJson());
-      final token = request.data['user']['token'];
+      final token = request.data['token'];
+      request.data['user']['password'] = credentials.password;
+      final user = request.data['user'];
 
-      /// Remove Token from User Infos
-      final user = {};
-      (request.data['user'] as Map).forEach((key, value) {
-        if (key != 'token') {
-          user[key] = value;
-        }
-      });
-      user['password'] = credentials.password;
-
-      await storageRepo.setData('auth', 'token', token);
-      await storageRepo.setData('auth', 'user', user);
+      await storageRepo.setData<String>('token', token);
+      await storageRepo.setData<Map>('user', user);
     } on DioError catch (e) {
       final errorMessage = e.response?.data['message'].runtimeType == List
           ? e.response?.data['message'].first
@@ -41,19 +34,12 @@ class AuthRepository {
   Future<void> signUp(SignupModel credentials) async {
     try {
       final request = await _dio.post('$authApi/register', data: credentials.toJson());
-      final token = request.data['user']['token'];
+      final token = request.data['token'];
+      request.data['user']['password'] = credentials.password;
+      final user = request.data['user'];
 
-      /// Remove Token from User Infos
-      final user = {};
-      (request.data['user'] as Map).forEach((key, value) {
-        if (key != 'token') {
-          user[key] = value;
-        }
-      });
-      user['password'] = credentials.password;
-
-      await storageRepo.setData('auth', 'token', token);
-      await storageRepo.setData('auth', 'user', user);
+      await storageRepo.setData<String>('token', token);
+      await storageRepo.setData<Map>('user', user);
     } on DioError catch (e) {
       final errorMessage = e.response?.data['message'].runtimeType == List
           ? e.response?.data['message'].first
@@ -65,7 +51,7 @@ class AuthRepository {
   }
 
   Future<void> attemptAutoLogin() async {
-    final user = await storageRepo.getData<Map>('auth', 'user');
+    final user = await storageRepo.getData<Map>('user');
     if (user.isNotEmpty) {
       try {
         final credentials = LoginModel(email: user['email'], password: user['password']);
@@ -80,7 +66,7 @@ class AuthRepository {
 
   Future<void> logOut() async {
     try {
-      await storageRepo.clearData('auth');
+      await storageRepo.clearData();
     } catch (e) {
       throw Exception(e);
     }
