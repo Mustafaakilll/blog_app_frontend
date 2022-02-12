@@ -33,17 +33,16 @@ class _SessionPageBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<SessionNavigatorCubit, SessionNavigatorState>(
       builder: (context, state) {
-        final _navCubit = context.read<SessionNavigatorCubit>();
         return PageView.builder(
-          onPageChanged: (value) => _navCubit.setPageIndex(value),
+          onPageChanged: (value) => context.read<SessionNavigatorCubit>().setPageIndex(value),
           itemCount: 3,
           itemBuilder: (context, index) {
-            switch (_navCubit.getPageIndex(state)) {
-              case 0:
+            switch (state.runtimeType) {
+              case Home:
                 return const HomeView();
-              case 1:
+              case AddArticle:
                 return const AddArticleView();
-              case 2:
+              case Profile:
                 return const ProfileView();
             }
             return const HomeView();
@@ -61,10 +60,9 @@ class _BottomNavBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<SessionNavigatorCubit, SessionNavigatorState>(
       builder: (context, state) {
-        final _navCubit = context.read<SessionNavigatorCubit>();
         return BottomNavigationBar(
-          currentIndex: _navCubit.getPageIndex(state),
-          onTap: (value) => _navCubit.setPageIndex(value),
+          currentIndex: context.read<SessionNavigatorCubit>().getPageIndex(state),
+          onTap: (value) => context.read<SessionNavigatorCubit>().setPageIndex(value),
           showUnselectedLabels: false,
           items: [
             const BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),

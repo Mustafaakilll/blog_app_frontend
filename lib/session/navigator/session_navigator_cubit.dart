@@ -10,9 +10,9 @@ class SessionNavigatorCubit extends Cubit<SessionNavigatorState> {
     switch (state.runtimeType) {
       case Home:
         return 0;
-      case Profile:
-        return 1;
       case AddArticle:
+        return 1;
+      case Profile:
         return 2;
       default:
         return 0;
@@ -25,10 +25,10 @@ class SessionNavigatorCubit extends Cubit<SessionNavigatorState> {
         emit(const Home());
         break;
       case 1:
-        emit(const Profile());
+        emit(const AddArticle());
         break;
       case 2:
-        emit(const AddArticle());
+        emit(const Profile());
     }
   }
 }
