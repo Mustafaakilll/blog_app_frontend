@@ -17,8 +17,9 @@ class UserModel {
     required this.followers,
     required this.articles,
     required this.following,
-  });
+  }) : isMe = false;
 
+  // TODO: REMOVE TOJSON IF NOT NECESSARY
   Map<String, dynamic> toJson() => _$UserModelToJson(this);
 
   final int id;
@@ -30,5 +31,6 @@ class UserModel {
   final String image;
   final List followers;
   final List articles;
-  final bool following;
+  bool following;
+  bool isMe;
 }

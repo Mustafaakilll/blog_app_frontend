@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
@@ -11,6 +13,8 @@ part 'profile_state.dart';
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   ProfileBloc(this._userRepo, this._storageRepo) : super(const UserFetching()) {
     on<FetchUser>(_onFetchUser);
+    on<FollowUser>(_onFollowUser);
+    on<UnfollowUser>(_onUnfollowUser);
   }
 
   final UserRepository _userRepo;
@@ -20,7 +24,25 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     emit(const UserFetching());
     try {
       final userInfo = await _storageRepo.getData<Map<dynamic, dynamic>>('user');
-      final user = await _userRepo.getUserByUsername(userInfo['username']);
+      final user = await _userRepo.getUserByUsername(userInfo);
+      emit(UserFetchedSuccessful(user: user));
+    } catch (e) {
+      emit(UserFetchedFailed(error: e.toString()));
+    }
+  }
+
+  Future<void> _onFollowUser(FollowUser event, Emitter<ProfileState> emit) async {
+    try {
+      final user = await _userRepo.followUser(event.username);
+      emit(UserFetchedSuccessful(user: user));
+    } catch (e) {
+      emit(UserFetchedFailed(error: e.toString()));
+    }
+  }
+
+  Future<void> _onUnfollowUser(UnfollowUser event, Emitter<ProfileState> emit) async {
+    try {
+      final user = await _userRepo.unfollowUser(event.username);
       emit(UserFetchedSuccessful(user: user));
     } catch (e) {
       emit(UserFetchedFailed(error: e.toString()));
