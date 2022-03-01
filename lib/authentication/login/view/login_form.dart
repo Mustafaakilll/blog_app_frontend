@@ -1,13 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+part of 'login_view.dart';
 
-import '../../../utils/constants.dart';
-import '../../../utils/form_status.dart';
-import '../../signup/view/signup_view.dart';
-import '../login_bloc.dart';
-
-class LoginForm extends StatelessWidget {
-  const LoginForm({Key? key}) : super(key: key);
+class _LoginForm extends StatelessWidget {
+  const _LoginForm({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

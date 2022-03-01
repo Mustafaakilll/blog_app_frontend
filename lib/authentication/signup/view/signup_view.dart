@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../utils/form_status.dart';
 import '../../auth_flow/authentication_cubit.dart';
 import '../../auth_repository.dart';
 import '../signup_bloc.dart';
-import 'signup_form.dart';
+
+part 'signup_form.dart';
 
 class SignupView extends StatelessWidget {
   const SignupView({Key? key}) : super(key: key);

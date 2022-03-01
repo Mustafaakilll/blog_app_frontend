@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../utils/constants.dart';
+import '../../../utils/form_status.dart';
 import '../../auth_flow/authentication_cubit.dart';
 import '../../auth_repository.dart';
+import '../../signup/view/signup_view.dart';
 import '../login_bloc.dart';
-import 'login_form.dart';
+
+part 'login_form.dart';
 
 class LoginView extends StatelessWidget {
   const LoginView({Key? key}) : super(key: key);
@@ -22,7 +26,7 @@ class LoginView extends StatelessWidget {
           authRepository: context.read<AuthRepository>(),
           authenticationCubit: context.read<AuthenticationCubit>(),
         ),
-        child: const LoginForm(),
+        child: const _LoginForm(),
       ),
     );
   }
