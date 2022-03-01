@@ -10,8 +10,7 @@ import 'session/navigator/session_navigator.dart';
 import 'session/navigator/session_navigator_cubit.dart';
 import 'session/user_repository.dart';
 import 'splash/splash_view.dart';
-import 'utils/constants.dart';
-import 'utils/storage_repository.dart';
+import 'utils/utils.dart';
 
 Future<void> main() async {
   await dotenv.load();
@@ -40,7 +39,7 @@ class MyApp extends StatelessWidget {
           navigatorKey: AppConstants.navKey,
           title: 'Flutter Demo',
           theme: ThemeData.dark(),
-          builder: (context, child) {
+          builder: (_, child) {
             return BlocListener<AuthenticationCubit, AuthenticationState>(
               listener: (_, state) {
                 if (state is Authenticated)
