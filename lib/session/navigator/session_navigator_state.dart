@@ -4,22 +4,22 @@ abstract class SessionNavigatorState extends Equatable {
   const SessionNavigatorState();
 }
 
-class Home extends SessionNavigatorState {
-  const Home();
+class HomePage extends SessionNavigatorState {
+  const HomePage();
 
   @override
   List<Object> get props => [];
 }
 
-class Profile extends SessionNavigatorState {
-  const Profile();
+class ProfilePage extends SessionNavigatorState {
+  const ProfilePage();
 
   @override
   List<Object> get props => [];
 }
 
-class AddArticle extends SessionNavigatorState {
-  const AddArticle();
+class AddArticlePage extends SessionNavigatorState {
+  const AddArticlePage();
 
   @override
   List<Object> get props => [];

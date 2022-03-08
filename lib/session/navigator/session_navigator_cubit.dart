@@ -4,15 +4,15 @@ import 'package:equatable/equatable.dart';
 part 'session_navigator_state.dart';
 
 class SessionNavigatorCubit extends Cubit<SessionNavigatorState> {
-  SessionNavigatorCubit() : super(const Home());
+  SessionNavigatorCubit() : super(const HomePage());
 
   int getPageIndex(SessionNavigatorState state) {
     switch (state.runtimeType) {
-      case Home:
+      case HomePage:
         return 0;
-      case AddArticle:
+      case AddArticlePage:
         return 1;
-      case Profile:
+      case ProfilePage:
         return 2;
       default:
         return 0;
@@ -22,13 +22,13 @@ class SessionNavigatorCubit extends Cubit<SessionNavigatorState> {
   void setPageIndex(int index) {
     switch (index) {
       case 0:
-        emit(const Home());
+        emit(const HomePage());
         break;
       case 1:
-        emit(const AddArticle());
+        emit(const AddArticlePage());
         break;
       case 2:
-        emit(const Profile());
+        emit(const ProfilePage());
     }
   }
 }
