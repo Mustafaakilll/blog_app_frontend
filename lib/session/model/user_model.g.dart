@@ -17,7 +17,7 @@ UserModel _$UserModelFromJson(Map<String, dynamic> json) => UserModel(
       followers: json['followers'] as List<dynamic>,
       articles: json['articles'] as List<dynamic>,
       following: json['following'] as bool,
-    );
+    )..isMe = json['isMe'] as bool;
 
 Map<String, dynamic> _$UserModelToJson(UserModel instance) => <String, dynamic>{
       'id': instance.id,
@@ -30,4 +30,5 @@ Map<String, dynamic> _$UserModelToJson(UserModel instance) => <String, dynamic>{
       'followers': instance.followers,
       'articles': instance.articles,
       'following': instance.following,
+      'isMe': instance.isMe,
     };
