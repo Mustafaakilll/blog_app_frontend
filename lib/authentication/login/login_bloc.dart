@@ -4,7 +4,7 @@ import 'package:equatable/equatable.dart';
 import '../../utils/form_status.dart';
 import '../auth_flow/authentication_cubit.dart';
 import '../auth_repository.dart';
-import 'model/login_model.dart';
+import 'model/request_login_model.dart';
 
 part 'login_event.dart';
 part 'login_state.dart';
@@ -30,7 +30,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   Future<void> _onFormSubmitted(LoginFormSubmitted event, Emitter<LoginState> emit) async {
     emit(state.copyWith(formStatus: const FormSubmitting()));
     try {
-      await authRepository.login(LoginModel(email: state.email, password: state.password));
+      await authRepository.login(RequestLoginModel(email: state.email, password: state.password));
       emit(state.copyWith(formStatus: const SubmissionSuccess()));
       authenticationCubit.showHome();
     } on Exception catch (e) {

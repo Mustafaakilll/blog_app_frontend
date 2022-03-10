@@ -4,7 +4,7 @@ import 'package:equatable/equatable.dart';
 import '../../utils/form_status.dart';
 import '../auth_flow/authentication_cubit.dart';
 import '../auth_repository.dart';
-import 'model/signup_model.dart';
+import 'model/request_signup_model.dart';
 
 part 'signup_event.dart';
 part 'signup_state.dart';
@@ -35,7 +35,8 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
   Future<void> _onFormSubmitted(SignupFormSubmitted event, Emitter<SignupState> emit) async {
     emit(state.copyWith(formStatus: const FormSubmitting()));
     try {
-      await authRepository.signUp(SignupModel(username: state.username, email: state.email, password: state.password));
+      await authRepository
+          .signUp(RequestSignupModel(username: state.username, email: state.email, password: state.password));
       emit(state.copyWith(formStatus: const SubmissionSuccess()));
       authenticationCubit.showHome();
     } on Exception catch (e) {

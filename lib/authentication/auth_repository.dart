@@ -2,8 +2,9 @@ import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import '../utils/storage_repository.dart';
-import 'login/model/login_model.dart';
-import 'signup/model/signup_model.dart';
+import 'login/model/request_login_model.dart';
+import 'login/model/response_login_model.dart';
+import 'signup/model/request_signup_model.dart';
 
 class AuthRepository {
   AuthRepository({required this.storageRepo});
@@ -12,12 +13,13 @@ class AuthRepository {
   final authApi = dotenv.get('AUTH_ENDPOINT');
   final StorageRepository storageRepo;
 
-  Future<void> login(LoginModel credentials) async {
+  Future<void> login(RequestLoginModel credentials) async {
     try {
-      final request = await _dio.post('$authApi/login', data: credentials.toJson());
-      final token = request.data['token'];
-      request.data['user']['password'] = credentials.password;
-      final user = request.data['user'];
+      final _request = await _dio.post('$authApi/login', data: credentials.toJson());
+      final response = ResponseLoginModel.fromJson(_request.data);
+      final token = response.token;
+      response.user.password = credentials.password;
+      final user = response.user.toJson();
 
       await storageRepo.setData<String>('token', token);
       await storageRepo.setData<Map>('user', user);
@@ -31,12 +33,13 @@ class AuthRepository {
     }
   }
 
-  Future<void> signUp(SignupModel credentials) async {
+  Future<void> signUp(RequestSignupModel credentials) async {
     try {
-      final request = await _dio.post('$authApi/register', data: credentials.toJson());
-      final token = request.data['token'];
-      request.data['user']['password'] = credentials.password;
-      final user = request.data['user'];
+      final _request = await _dio.post('$authApi/register', data: credentials.toJson());
+      final response = ResponseLoginModel.fromJson(_request.data);
+      final token = response.token;
+      response.user.password = credentials.password;
+      final user = response.user.toJson();
 
       await storageRepo.setData<String>('token', token);
       await storageRepo.setData<Map>('user', user);
@@ -54,7 +57,7 @@ class AuthRepository {
     final user = await storageRepo.getData<Map>('user');
     if (user.isNotEmpty) {
       try {
-        final credentials = LoginModel(email: user['email'], password: user['password']);
+        final credentials = RequestLoginModel(email: user['email'], password: user['password']);
         await login(credentials);
       } catch (e) {
         throw Exception(e);
@@ -64,9 +67,9 @@ class AuthRepository {
     }
   }
 
-  Future<void> logOut() async {
+  void logOut() {
     try {
-      await storageRepo.clearData();
+      storageRepo.clearData();
     } catch (e) {
       throw Exception(e);
     }
