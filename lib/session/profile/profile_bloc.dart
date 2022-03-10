@@ -4,8 +4,8 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
 import '../../utils/storage_repository.dart';
-import '../model/user_model.dart';
 import '../user_repository.dart';
+import 'model/user_model.dart';
 
 part 'profile_event.dart';
 part 'profile_state.dart';

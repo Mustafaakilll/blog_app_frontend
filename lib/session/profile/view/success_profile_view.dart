@@ -22,7 +22,7 @@ class _SuccessBody extends StatelessWidget {
         return AppBar(
           title: const Text('Profile'),
           actions: [
-            state.user.isMe ? _logOutButton(context) : Container(),
+            state.user.isMe! ? _logOutButton(context) : Container(),
           ],
         );
       },
@@ -60,7 +60,7 @@ class _SuccessBody extends StatelessWidget {
             Text(state.user.email),
             context.emptySizedHeightBoxLow,
             Text('Followers: ${state.user.followers.length}'),
-            state.user.isMe
+            state.user.isMe!
                 ? Container()
                 : state.user.following
                     ? TextButton(
