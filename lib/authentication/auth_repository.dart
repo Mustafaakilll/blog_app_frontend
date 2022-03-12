@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import '../utils/storage_repository.dart';
 import 'login/model/request_login_model.dart';
@@ -7,15 +6,14 @@ import 'login/model/response_login_model.dart';
 import 'signup/model/request_signup_model.dart';
 
 class AuthRepository {
-  AuthRepository({required this.storageRepo});
+  AuthRepository({required this.dio, required this.storageRepo});
 
-  final Dio _dio = Dio();
-  final authApi = dotenv.get('AUTH_ENDPOINT');
+  final Dio dio;
   final StorageRepository storageRepo;
 
   Future<void> login(RequestLoginModel credentials) async {
     try {
-      final _request = await _dio.post('$authApi/login', data: credentials.toJson());
+      final _request = await dio.post('/auth/login', data: credentials.toJson());
       final response = ResponseLoginModel.fromJson(_request.data);
       final token = response.token;
       response.user.password = credentials.password;
@@ -35,7 +33,7 @@ class AuthRepository {
 
   Future<void> signUp(RequestSignupModel credentials) async {
     try {
-      final _request = await _dio.post('$authApi/register', data: credentials.toJson());
+      final _request = await dio.post('/auth/register', data: credentials.toJson());
       final response = ResponseLoginModel.fromJson(_request.data);
       final token = response.token;
       response.user.password = credentials.password;

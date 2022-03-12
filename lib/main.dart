@@ -6,6 +6,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'authentication/auth_flow/authentication_cubit.dart';
 import 'authentication/auth_repository.dart';
 import 'authentication/login/view/login_view.dart';
+import 'core/network/dio_client.dart';
 import 'session/article_repository.dart';
 import 'session/navigator/session_navigator.dart';
 import 'session/navigator/session_navigator_cubit.dart';
@@ -16,20 +17,24 @@ import 'utils/utils.dart';
 Future<void> main() async {
   await dotenv.load();
   await Hive.initFlutter();
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  MyApp({Key? key}) : super(key: key);
+  final _dio = DioClient().dio;
 
   @override
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider(create: (context) => StorageRepository()),
-        RepositoryProvider(create: (context) => ArticleRepository(storageRepo: context.read<StorageRepository>())),
-        RepositoryProvider(create: (context) => UserRepository(context.read<StorageRepository>())),
-        RepositoryProvider(create: (context) => AuthRepository(storageRepo: context.read<StorageRepository>())),
+        RepositoryProvider(
+            create: (context) => ArticleRepository(storageRepo: context.read<StorageRepository>(), dio: _dio)),
+        RepositoryProvider(
+            create: (context) => UserRepository(storageRepo: context.read<StorageRepository>(), dio: _dio)),
+        RepositoryProvider(
+            create: (context) => AuthRepository(storageRepo: context.read<StorageRepository>(), dio: _dio)),
       ],
       child: MultiBlocProvider(
         providers: [
