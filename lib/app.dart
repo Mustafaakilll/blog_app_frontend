@@ -19,10 +19,12 @@ class MyApp extends StatelessWidget {
       builder: (_, child) {
         return BlocListener<AuthenticationCubit, AuthenticationState>(
           listener: (_, state) {
-            if (state is Authenticated)
-              AppConstants.navKey.currentState?.pushAndRemoveUntil(SessionNavigator.route(), (route) => false);
-            if (state is Unauthenticated)
-              AppConstants.navKey.currentState?.pushAndRemoveUntil(LoginView.route(), (route) => false);
+            state.whenOrNull(
+              authenticated: () =>
+                  AppConstants.navKey.currentState?.pushAndRemoveUntil(SessionNavigator.route(), (route) => false),
+              unauthenticated: () =>
+                  AppConstants.navKey.currentState?.pushAndRemoveUntil(LoginView.route(), (route) => false),
+            );
           },
           child: child,
         );

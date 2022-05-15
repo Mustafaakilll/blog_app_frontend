@@ -1,12 +1,13 @@
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../auth_repository.dart';
 
+part 'authentication_cubit.freezed.dart';
 part 'authentication_state.dart';
 
 class AuthenticationCubit extends Cubit<AuthenticationState> {
-  AuthenticationCubit({required this.authRepository}) : super(AuthenticationUnknown()) {
+  AuthenticationCubit({required this.authRepository}) : super(const Unknown()) {
     attemptAutoLogin();
   }
 
@@ -15,22 +16,22 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
   Future<void> attemptAutoLogin() async {
     try {
       await authRepository.attemptAutoLogin();
-      emit(Authenticated());
+      emit(const Authenticated());
     } catch (e) {
-      emit(Unauthenticated());
+      emit(const Unauthenticated());
     }
   }
 
   void showLogin() {
-    emit(Unauthenticated());
+    emit(const Unauthenticated());
   }
 
   void showHome() {
-    emit(Authenticated());
+    emit(const Authenticated());
   }
 
   void logOut() {
     authRepository.logOut();
-    emit(Unauthenticated());
+    emit(const Unauthenticated());
   }
 }
