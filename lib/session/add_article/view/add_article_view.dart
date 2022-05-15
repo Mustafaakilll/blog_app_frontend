@@ -38,9 +38,9 @@ class _AddArticleForm extends StatelessWidget {
         if (state is SubmissionSuccess) {
           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Article added')));
         }
-        final _formStatus = state.formStatus;
-        if (_formStatus is SubmissionFailure) {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(_formStatus.exception)));
+        final formStatus = state.formStatus;
+        if (formStatus is SubmissionFailure) {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(formStatus.exception)));
         }
       },
       child: Column(
@@ -194,7 +194,8 @@ class _SubmitButton extends StatelessWidget {
     return BlocBuilder<AddArticleBloc, AddArticleState>(
       builder: (context, state) {
         return ElevatedButton(
-          onPressed: () => context.read<AddArticleBloc>().add(const AddArticle()),
+          onPressed:
+              state.formStatus is FormSubmitting ? null : () => context.read<AddArticleBloc>().add(const AddArticle()),
           child: const Text('Add Article'),
         );
       },

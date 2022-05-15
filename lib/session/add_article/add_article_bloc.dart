@@ -36,16 +36,16 @@ class AddArticleBloc extends Bloc<AddArticleEvent, AddArticleState> {
   }
 
   Future<void> _onOpenImagePicker(OpenImagePicker event, Emitter<AddArticleState> emit) async {
-    final _pickedFile = await _picker.getImage(source: ImageSource.gallery);
-    if (_pickedFile == null) return;
-    emit(state.copyWith(coverImage: _pickedFile.path));
+    final pickedFile = await _picker.getImage(source: ImageSource.gallery);
+    if (pickedFile == null) return;
+    emit(state.copyWith(coverImage: pickedFile.path));
   }
 
   Future<void> _onAddArticle(AddArticle event, Emitter<AddArticleState> emit) async {
     emit(state.copyWith(formStatus: const FormSubmitting()));
     try {
-      final _imageUrl = await articleRepo.uploadImageToCloud(state.coverImage!, 'image');
-      articleRepo.addArticle(AddArticleModel(state.title, state.description, state.tags, _imageUrl));
+      final imageUrl = await articleRepo.uploadImageToCloud(state.coverImage!, 'image');
+      await articleRepo.addArticle(AddArticleModel(state.title, state.description, state.tags, imageUrl));
       emit(state.copyWith(formStatus: const SubmissionSuccess()));
       sessionNavCubit.setPageIndex(0);
     } on Exception catch (e) {

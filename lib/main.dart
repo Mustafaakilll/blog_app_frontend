@@ -3,26 +3,28 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
+import 'app.dart';
 import 'authentication/auth_flow/authentication_cubit.dart';
 import 'authentication/auth_repository.dart';
-import 'authentication/login/view/login_view.dart';
 import 'core/network/dio_client.dart';
 import 'session/article_repository.dart';
-import 'session/navigator/session_navigator.dart';
 import 'session/navigator/session_navigator_cubit.dart';
 import 'session/user_repository.dart';
-import 'splash/splash_view.dart';
 import 'utils/utils.dart';
 
 Future<void> main() async {
   await dotenv.load();
   await Hive.initFlutter();
-  runApp(MyApp());
+  runApp(App());
 }
 
-class MyApp extends StatelessWidget {
-  MyApp({Key? key}) : super(key: key);
-  final _dio = DioClient().dio;
+class App extends StatelessWidget {
+  App({Key? key}) : super(key: key);
+
+  final _authDio = BaseDioClient.auth().dio;
+  final _userDio = BaseDioClient.user().dio;
+  final _articleDio = BaseDioClient.article().dio;
+  final _cloudinaryDio = BaseDioClient.cloudinary().dio;
 
   @override
   Widget build(BuildContext context) {
@@ -30,11 +32,16 @@ class MyApp extends StatelessWidget {
       providers: [
         RepositoryProvider(create: (context) => StorageRepository()),
         RepositoryProvider(
-            create: (context) => ArticleRepository(storageRepo: context.read<StorageRepository>(), dio: _dio)),
+          create: (context) => ArticleRepository(
+            storageRepo: context.read<StorageRepository>(),
+            cloudinaryDio: _cloudinaryDio,
+            articleDio: _articleDio,
+          ),
+        ),
         RepositoryProvider(
-            create: (context) => UserRepository(storageRepo: context.read<StorageRepository>(), dio: _dio)),
+            create: (context) => UserRepository(storageRepo: context.read<StorageRepository>(), dio: _userDio)),
         RepositoryProvider(
-            create: (context) => AuthRepository(storageRepo: context.read<StorageRepository>(), dio: _dio)),
+            create: (context) => AuthRepository(storageRepo: context.read<StorageRepository>(), dio: _authDio)),
       ],
       child: MultiBlocProvider(
         providers: [
@@ -42,23 +49,7 @@ class MyApp extends StatelessWidget {
               create: (context) => AuthenticationCubit(authRepository: context.read<AuthRepository>())),
           BlocProvider<SessionNavigatorCubit>(create: (context) => SessionNavigatorCubit()),
         ],
-        child: MaterialApp(
-          navigatorKey: AppConstants.navKey,
-          title: 'Flutter Demo',
-          theme: ThemeData.dark(),
-          builder: (_, child) {
-            return BlocListener<AuthenticationCubit, AuthenticationState>(
-              listener: (_, state) {
-                if (state is Authenticated)
-                  AppConstants.navKey.currentState?.pushAndRemoveUntil(SessionNavigator.route(), (route) => false);
-                if (state is Unauthenticated)
-                  AppConstants.navKey.currentState?.pushAndRemoveUntil(LoginView.route(), (route) => false);
-              },
-              child: child,
-            );
-          },
-          onGenerateRoute: (_) => SplashView.route(),
-        ),
+        child: const MyApp(),
       ),
     );
   }

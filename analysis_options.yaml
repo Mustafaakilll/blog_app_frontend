@@ -8,6 +8,7 @@ linter:
     - avoid_init_to_null
     - avoid_function_literals_in_foreach_calls
     - avoid_null_checks_in_equality_operators
+    - avoid_print
     - avoid_relative_lib_imports
     - avoid_return_types_on_setters
     - avoid_shadowing_type_parameters
@@ -61,6 +62,9 @@ linter:
     - unsafe_html
     - use_full_hex_values_for_flutter_colors
     - use_function_type_syntax_for_parameters
+    - use_is_even_rather_than_modulo
     - use_rethrow_when_possible
     - use_setters_to_change_properties
     - valid_regexps
+    - depend_on_referenced_packages
+

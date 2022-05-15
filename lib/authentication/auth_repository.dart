@@ -13,8 +13,8 @@ class AuthRepository {
 
   Future<void> login(RequestLoginModel credentials) async {
     try {
-      final _request = await dio.post('/auth/login', data: credentials.toJson());
-      final response = ResponseLoginModel.fromJson(_request.data);
+      final request = await dio.post('/login', data: credentials.toJson());
+      final response = ResponseLoginModel.fromJson(request.data);
       final token = response.token;
       response.user.password = credentials.password;
       final user = response.user.toJson();
@@ -33,8 +33,8 @@ class AuthRepository {
 
   Future<void> signUp(RequestSignupModel credentials) async {
     try {
-      final _request = await dio.post('/auth/register', data: credentials.toJson());
-      final response = ResponseLoginModel.fromJson(_request.data);
+      final request = await dio.post('/register', data: credentials.toJson());
+      final response = ResponseLoginModel.fromJson(request.data);
       final token = response.token;
       response.user.password = credentials.password;
       final user = response.user.toJson();
