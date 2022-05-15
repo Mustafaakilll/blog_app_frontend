@@ -1,4 +1,11 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../utils/widget_extension.dart';
+import '../article_repository.dart';
+import 'home_bloc.dart';
+import 'model/article_response_model.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -9,10 +16,110 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('HOME'),
+    return BlocProvider<HomeBloc>(
+      create: (context) => HomeBloc(articleRepo: context.read<ArticleRepository>())..add(const GetArticle()),
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('HOME'),
+        ),
+        body: const _HomeBody(),
       ),
     );
+  }
+}
+
+class _HomeBody extends StatelessWidget {
+  const _HomeBody({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocConsumer<HomeBloc, HomeState>(
+      listener: (context, state) {
+        if (state is ArticleLoadedFail) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(state.exception)),
+          );
+        }
+      },
+      builder: (context, state) {
+        if (state is ArticleLoading) {
+          return const _HomeLoading();
+        } else if (state is ArticleLoadedSuccess) {
+          return _HomeArticleBody(articles: state.articles);
+        } else if (state is ArticleLoadedFail) {
+          debugPrint(state.exception);
+          return _HomeErrorBody(exception: state.exception);
+        } else {
+          return const Center(child: Text('Unknown state'));
+        }
+      },
+    );
+  }
+}
+
+class _HomeLoading extends StatelessWidget {
+  const _HomeLoading({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const Center(child: CircularProgressIndicator());
+  }
+}
+
+class _HomeArticleBody extends StatelessWidget {
+  const _HomeArticleBody({Key? key, required this.articles}) : super(key: key);
+
+  final List<ArticleResponseModel> articles;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      itemCount: articles.length,
+      itemBuilder: (context, index) {
+        final article = articles[index];
+        return Card(
+          color: Colors.transparent,
+          child: Column(
+            children: [
+              _articleAuthor(article.author, context.height),
+              _articleImage(article),
+              _articleDetail(article),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _articleAuthor(Author author, double height) {
+    return Row(
+      children: <Widget>[
+        CircleAvatar(foregroundImage: NetworkImage(author.image), radius: 20),
+        SizedBox(width: height * .01),
+        Text(author.username),
+      ],
+    );
+  }
+}
+
+Widget _articleImage(ArticleResponseModel article) {
+  return AspectRatio(aspectRatio: 4 / 5, child: CachedNetworkImage(imageUrl: article.coverImage));
+}
+
+Widget _articleDetail(ArticleResponseModel article) {
+  return ListTile(
+    title: Text(article.title),
+    subtitle: Text(article.body),
+  );
+}
+
+class _HomeErrorBody extends StatelessWidget {
+  const _HomeErrorBody({Key? key, required this.exception}) : super(key: key);
+
+  final String exception;
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(child: Text(exception));
   }
 }
