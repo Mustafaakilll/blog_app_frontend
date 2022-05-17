@@ -41,7 +41,7 @@ class _EmailInput extends StatelessWidget {
       buildWhen: (previous, current) => previous.email != current.email,
       builder: (context, state) {
         return TextField(
-          onChanged: (value) => context.read<LoginBloc>().add(EmailChanged(email: value)),
+          onChanged: (value) => context.read<LoginBloc>().add(LoginEvent.emailChanged(email: value)),
           decoration: const InputDecoration(labelText: 'email'),
         );
       },
@@ -58,7 +58,7 @@ class _PasswordInput extends StatelessWidget {
       buildWhen: (previous, current) => previous.password != current.password,
       builder: (context, state) {
         return TextField(
-          onChanged: (value) => context.read<LoginBloc>().add(PasswordChanged(password: value)),
+          onChanged: (value) => context.read<LoginBloc>().add(LoginEvent.passwordChanged(password: value)),
           decoration: const InputDecoration(labelText: 'password'),
           obscureText: true,
         );
@@ -78,7 +78,7 @@ class _LoginButton extends StatelessWidget {
         return state.formStatus == const FormSubmitting()
             ? const CircularProgressIndicator()
             : ElevatedButton(
-                onPressed: () => context.read<LoginBloc>().add(const LoginFormSubmitted()),
+                onPressed: () => context.read<LoginBloc>().add(const LoginEvent.formSubmit()),
                 child: const Text('Submit'),
               );
       },
