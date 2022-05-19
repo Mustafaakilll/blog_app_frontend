@@ -6,5 +6,5 @@ class LoginState with _$LoginState {
     @Default('') String email,
     @Default('') String password,
     @Default(InitialFormStatus()) FormStatus formStatus,
-  }) = Initial;
+  }) = _Initial;
 }

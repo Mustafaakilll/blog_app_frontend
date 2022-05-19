@@ -11,7 +11,7 @@ part 'login_event.dart';
 part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  LoginBloc({required this.authenticationCubit, required this.authRepository}) : super(const Initial()) {
+  LoginBloc({required this.authenticationCubit, required this.authRepository}) : super(const LoginState.initial()) {
     on<LoginEvent>((event, emit) {
       event.when(
         emailChanged: _onEmailChanged,

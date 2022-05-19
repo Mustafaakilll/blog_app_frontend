@@ -1,31 +1,20 @@
-import 'package:json_annotation/json_annotation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
+part 'response_signup_model.freezed.dart';
 part 'response_signup_model.g.dart';
 
-@JsonSerializable()
-class ResponseSignupModel {
-  ResponseSignupModel({
-    required this.id,
-    required this.createdAt,
-    required this.updatedAt,
-    required this.username,
-    required this.email,
-    required this.bio,
-    required this.image,
-  });
+@freezed
+class ResponseSignupModel with _$ResponseSignupModel {
+  const factory ResponseSignupModel({
+    required int id,
+    required String createdAt,
+    required String updatedAt,
+    required String username,
+    required String email,
+    @Default('') String? password,
+    required String bio,
+    required String image,
+  }) = _ResponseSignupModel;
 
-  factory ResponseSignupModel.fromJson(Map<String, dynamic> json) {
-    return _$ResponseSignupModelFromJson(json);
-  }
-
-  Map<String, dynamic> toJson() => _$ResponseSignupModelToJson(this);
-
-  final int id;
-  final String createdAt;
-  final String updatedAt;
-  final String username;
-  final String email;
-  String? password;
-  final String bio;
-  final String image;
+  factory ResponseSignupModel.fromJson(Map<String, dynamic> json) => _$ResponseSignupModelFromJson(json);
 }

@@ -1,38 +1,45 @@
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../utils/form_status.dart';
 import '../auth_flow/authentication_cubit.dart';
 import '../auth_repository.dart';
 import 'model/request_signup_model.dart';
 
+part 'signup_bloc.freezed.dart';
 part 'signup_event.dart';
 part 'signup_state.dart';
 
 class SignupBloc extends Bloc<SignupEvent, SignupState> {
-  SignupBloc({required this.authenticationCubit, required this.authRepository}) : super(const SignupState()) {
-    on<SignupEmailChanged>(_onEmailChanged);
-    on<SignupUsernameChanged>(_onUsernameChanged);
-    on<SignupPasswordChanged>(_onPasswordChanged);
-    on<SignupFormSubmitted>(_onFormSubmitted);
+  SignupBloc({required this.authenticationCubit, required this.authRepository}) : super(const SignupState.initial()) {
+    on<SignupEvent>(
+      (event, emit) {
+        event.when(
+          usernameChanged: _onUsernameChanged,
+          emailChanged: _onEmailChanged,
+          passwordChanged: _onPasswordChanged,
+          formSubmit: _onFormSubmit,
+        );
+      },
+    );
   }
 
   final AuthRepository authRepository;
   final AuthenticationCubit authenticationCubit;
 
-  void _onEmailChanged(SignupEmailChanged event, Emitter<SignupState> emit) {
-    emit(state.copyWith(email: event.email));
+  void _onEmailChanged(String email) {
+    emit(state.copyWith(email: email));
   }
 
-  void _onUsernameChanged(SignupUsernameChanged event, Emitter<SignupState> emit) {
-    emit(state.copyWith(username: event.username));
+  void _onUsernameChanged(String username) {
+    emit(state.copyWith(username: username));
   }
 
-  void _onPasswordChanged(SignupPasswordChanged event, Emitter<SignupState> emit) {
-    emit(state.copyWith(password: event.password));
+  void _onPasswordChanged(String password) {
+    emit(state.copyWith(password: password));
   }
 
-  Future<void> _onFormSubmitted(SignupFormSubmitted event, Emitter<SignupState> emit) async {
+  Future<void> _onFormSubmit() async {
     emit(state.copyWith(formStatus: const FormSubmitting()));
     try {
       await authRepository

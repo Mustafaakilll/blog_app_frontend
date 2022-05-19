@@ -41,7 +41,7 @@ class _EmailInput extends StatelessWidget {
       buildWhen: (previous, current) => previous.email != current.email,
       builder: (context, state) {
         return TextField(
-          onChanged: (value) => context.read<SignupBloc>().add(SignupEmailChanged(email: value)),
+          onChanged: (value) => context.read<SignupBloc>().add(SignupEvent.emailChanged(email: value)),
           decoration: const InputDecoration(labelText: 'email'),
         );
       },
@@ -58,7 +58,7 @@ class _UsernameInput extends StatelessWidget {
       buildWhen: (previous, current) => previous.username != current.username,
       builder: (context, state) {
         return TextField(
-          onChanged: (value) => context.read<SignupBloc>().add(SignupUsernameChanged(username: value)),
+          onChanged: (value) => context.read<SignupBloc>().add(SignupEvent.usernameChanged(username: value)),
           decoration: const InputDecoration(labelText: 'username'),
         );
       },
@@ -75,7 +75,7 @@ class _PasswordInput extends StatelessWidget {
       buildWhen: (previous, current) => previous.password != current.password,
       builder: (context, state) {
         return TextField(
-          onChanged: (value) => context.read<SignupBloc>().add(SignupPasswordChanged(password: value)),
+          onChanged: (value) => context.read<SignupBloc>().add(SignupEvent.passwordChanged(password: value)),
           decoration: const InputDecoration(labelText: 'password'),
           obscureText: true,
         );
@@ -95,7 +95,7 @@ class _SignupButton extends StatelessWidget {
         return state.formStatus == const FormSubmitting()
             ? const CircularProgressIndicator()
             : ElevatedButton(
-                onPressed: () => context.read<SignupBloc>().add(const SignupFormSubmitted()),
+                onPressed: () => context.read<SignupBloc>().add(const SignupEvent.formSubmit()),
                 child: const Text('Submit'),
               );
       },
