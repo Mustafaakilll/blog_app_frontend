@@ -16,7 +16,7 @@ class AuthRepository {
       final request = await dio.post('/login', data: credentials.toJson());
       final response = ResponseLoginModel.fromJson(request.data);
       final token = response.token;
-      response.user.password = credentials.password;
+      response.user.copyWith(password: credentials.password);
       final user = response.user.toJson();
 
       await storageRepo.setData<String>('token', token);
@@ -36,7 +36,7 @@ class AuthRepository {
       final request = await dio.post('/register', data: credentials.toJson());
       final response = ResponseLoginModel.fromJson(request.data);
       final token = response.token;
-      response.user.password = credentials.password;
+      response.user.copyWith(password: credentials.password);
       final user = response.user.toJson();
 
       await storageRepo.setData<String>('token', token);

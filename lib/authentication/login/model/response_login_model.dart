@@ -1,43 +1,30 @@
-import 'package:json_annotation/json_annotation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
+part 'response_login_model.freezed.dart';
 part 'response_login_model.g.dart';
 
-@JsonSerializable(createToJson: false)
-class ResponseLoginModel {
-  ResponseLoginModel({required this.user, required this.token});
+@freezed
+class ResponseLoginModel with _$ResponseLoginModel {
+  const factory ResponseLoginModel({
+    required User user,
+    required String token,
+  }) = _ResponseLoginModel;
 
-  factory ResponseLoginModel.fromJson(Map<String, dynamic> json) {
-    return _$ResponseLoginModelFromJson(json);
-  }
-
-  final _User user;
-  final String token;
+  factory ResponseLoginModel.fromJson(Map<String, dynamic> json) => _$ResponseLoginModelFromJson(json);
 }
 
-@JsonSerializable()
-class _User {
-  _User({
-    required this.id,
-    required this.createdAt,
-    required this.updatedAt,
-    required this.username,
-    required this.email,
-    required this.bio,
-    required this.image,
-  });
+@freezed
+class User with _$User {
+  const factory User({
+    required int id,
+    @Default('') String password,
+    required String username,
+    required String email,
+    required String bio,
+    required String image,
+    required String createdAt,
+    required String updatedAt,
+  }) = _User;
 
-  factory _User.fromJson(Map<String, dynamic> json) {
-    return _$UserFromJson(json);
-  }
-
-  Map<String, dynamic> toJson() => _$UserToJson(this);
-
-  final int id;
-  final String createdAt;
-  final String updatedAt;
-  final String username;
-  final String email;
-  String? password;
-  final String bio;
-  final String image;
+  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 }

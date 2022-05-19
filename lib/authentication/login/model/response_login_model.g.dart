@@ -6,29 +6,38 @@ part of 'response_login_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-ResponseLoginModel _$ResponseLoginModelFromJson(Map<String, dynamic> json) =>
-    ResponseLoginModel(
-      user: _User.fromJson(json['user'] as Map<String, dynamic>),
+_$_ResponseLoginModel _$$_ResponseLoginModelFromJson(
+        Map<String, dynamic> json) =>
+    _$_ResponseLoginModel(
+      user: User.fromJson(json['user'] as Map<String, dynamic>),
       token: json['token'] as String,
     );
 
-_User _$UserFromJson(Map<String, dynamic> json) => _User(
+Map<String, dynamic> _$$_ResponseLoginModelToJson(
+        _$_ResponseLoginModel instance) =>
+    <String, dynamic>{
+      'user': instance.user,
+      'token': instance.token,
+    };
+
+_$_User _$$_UserFromJson(Map<String, dynamic> json) => _$_User(
       id: json['id'] as int,
-      createdAt: json['createdAt'] as String,
-      updatedAt: json['updatedAt'] as String,
+      password: json['password'] as String? ?? '',
       username: json['username'] as String,
       email: json['email'] as String,
       bio: json['bio'] as String,
       image: json['image'] as String,
-    )..password = json['password'] as String?;
+      createdAt: json['createdAt'] as String,
+      updatedAt: json['updatedAt'] as String,
+    );
 
-Map<String, dynamic> _$UserToJson(_User instance) => <String, dynamic>{
+Map<String, dynamic> _$$_UserToJson(_$_User instance) => <String, dynamic>{
       'id': instance.id,
-      'createdAt': instance.createdAt,
-      'updatedAt': instance.updatedAt,
+      'password': instance.password,
       'username': instance.username,
       'email': instance.email,
-      'password': instance.password,
       'bio': instance.bio,
       'image': instance.image,
+      'createdAt': instance.createdAt,
+      'updatedAt': instance.updatedAt,
     };
