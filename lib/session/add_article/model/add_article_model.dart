@@ -1,15 +1,16 @@
-import 'package:json_annotation/json_annotation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
+part 'add_article_model.freezed.dart';
 part 'add_article_model.g.dart';
 
-@JsonSerializable(explicitToJson: true, createFactory: false)
-class AddArticleModel {
-  AddArticleModel(this.title, this.body, this.tagList, this.coverImage);
+@freezed
+class AddArticleModel with _$AddArticleModel {
+  const factory AddArticleModel(
+    String title,
+    String body,
+    List<String> tagList,
+    String coverImage,
+  ) = _AddArticleModel;
 
-  final String title;
-  final String body;
-  final List<String> tagList;
-  final String coverImage;
-
-  Map<String, dynamic> toJson() => _$AddArticleModelToJson(this);
+  factory AddArticleModel.fromJson(Map<String, dynamic> json) => _$AddArticleModelFromJson(json);
 }

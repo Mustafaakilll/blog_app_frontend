@@ -18,59 +18,63 @@ class _SuccessBody extends StatelessWidget {
   BlocBuilder<ProfileBloc, ProfileState> _appBar() {
     return BlocBuilder<ProfileBloc, ProfileState>(
       builder: (context, state) {
-        state as UserFetchedSuccessful;
-        return AppBar(
-          title: const Text('Profile'),
-          actions: [
-            state.user.isMe! ? _logOutButton(context) : Container(),
-          ],
-        );
+        return state.whenOrNull(
+          fetchSuccess: (state) {
+            return AppBar(
+              title: const Text('Profile'),
+              actions: [state.isMe! ? _logOutButton(context, state.isMe!) : Container()],
+            );
+          },
+        )!;
       },
     );
   }
 
-  IconButton _logOutButton(BuildContext context) {
-    return IconButton(
-      icon: const Icon(Icons.exit_to_app),
-      onPressed: () => context.read<AuthRepository>().logOut(),
+  Widget _logOutButton(BuildContext context, bool isMe) {
+    return Visibility(
+      visible: isMe,
+      child: IconButton(
+        icon: const Icon(Icons.exit_to_app),
+        onPressed: () => context.read<AuthRepository>().logOut(),
+      ),
     );
   }
 
   BlocBuilder<ProfileBloc, ProfileState> _userAvatar() {
-    return BlocBuilder<ProfileBloc, ProfileState>(
-      builder: (context, state) {
-        state as UserFetchedSuccessful;
-        return CircleAvatar(
-          backgroundImage: NetworkImage(state.user.image),
-          radius: 50,
-        );
-      },
-    );
+    return BlocBuilder<ProfileBloc, ProfileState>(builder: (context, state) {
+      return state.whenOrNull(
+          fetchSuccess: (user) => CircleAvatar(
+                backgroundImage: NetworkImage(user.image),
+                radius: 50,
+              ))!;
+    });
   }
 
   BlocBuilder<ProfileBloc, ProfileState> _userInfo() {
     return BlocBuilder<ProfileBloc, ProfileState>(
       builder: (context, state) {
-        state as UserFetchedSuccessful;
-        return Column(
-          children: [
-            context.emptySizedHeightBoxLow,
-            Text(state.user.username),
-            context.emptySizedHeightBoxLow,
-            Text(state.user.email),
-            context.emptySizedHeightBoxLow,
-            Text('Followers: ${state.user.followers.length}'),
-            state.user.isMe!
-                ? Container()
-                : state.user.following
-                    ? TextButton(
-                        onPressed: () => context.read<ProfileBloc>().add(UnfollowUser(state.user.username)),
-                        child: const Text('Unfollow'))
-                    : TextButton(
-                        onPressed: () => context.read<ProfileBloc>().add(FollowUser(state.user.username)),
-                        child: const Text('Follow')),
-          ],
-        );
+        return state.whenOrNull(
+            fetchSuccess: (user) => Column(
+                  children: [
+                    context.emptySizedHeightBoxLow,
+                    Text(user.username),
+                    context.emptySizedHeightBoxLow,
+                    Text(user.email),
+                    context.emptySizedHeightBoxLow,
+                    Text('Followers: ${user.followers.length}'),
+                    user.isMe!
+                        ? Container()
+                        : user.following
+                            ? TextButton(
+                                onPressed: () =>
+                                    context.read<ProfileBloc>().add(ProfileEvent.unfollowUser(username: user.username)),
+                                child: const Text('Unfollow'))
+                            : TextButton(
+                                onPressed: () =>
+                                    context.read<ProfileBloc>().add(ProfileEvent.followUser(username: user.username)),
+                                child: const Text('Follow')),
+                  ],
+                ))!;
       },
     );
   }

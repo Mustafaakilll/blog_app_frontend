@@ -16,6 +16,8 @@ Future<void> main() async {
   await dotenv.load();
   await Hive.initFlutter();
   runApp(App());
+  // TODO: Add GetIT for Dependency Injection
+  // TODO: ADD FREEZED FOR MDOEL AND BLOC
 }
 
 class App extends StatelessWidget {

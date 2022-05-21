@@ -34,21 +34,11 @@ class _SessionPageBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<SessionNavigatorCubit, SessionNavigatorState>(
       builder: (context, state) {
-        return PageView.builder(
-          onPageChanged: (value) => context.read<SessionNavigatorCubit>().setPageIndex(value),
-          physics: const NeverScrollableScrollPhysics(),
-          itemCount: 3,
-          itemBuilder: (context, index) {
-            switch (state.runtimeType) {
-              case HomePage:
-                return const HomeView();
-              case AddArticlePage:
-                return const AddArticleView();
-              case ProfilePage:
-                return const ProfileView();
-            }
-            return const HomeView();
-          },
+        return state.maybeWhen(
+          home: () => const HomeView(),
+          profile: () => const ProfileView(),
+          addArticle: () => const AddArticleView(),
+          orElse: () => const HomeView(),
         );
       },
     );

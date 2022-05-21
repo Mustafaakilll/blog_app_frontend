@@ -1,26 +1,10 @@
 part of 'session_navigator_cubit.dart';
 
-abstract class SessionNavigatorState extends Equatable {
-  const SessionNavigatorState();
-}
+@freezed
+class SessionNavigatorState with _$SessionNavigatorState {
+  const factory SessionNavigatorState.home() = _Home;
 
-class HomePage extends SessionNavigatorState {
-  const HomePage();
+  const factory SessionNavigatorState.profile() = _Profile;
 
-  @override
-  List<Object> get props => [];
-}
-
-class ProfilePage extends SessionNavigatorState {
-  const ProfilePage();
-
-  @override
-  List<Object> get props => [];
-}
-
-class AddArticlePage extends SessionNavigatorState {
-  const AddArticlePage();
-
-  @override
-  List<Object> get props => [];
+  const factory SessionNavigatorState.addArticle() = _AddArticle;
 }

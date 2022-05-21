@@ -1,28 +1,31 @@
-import 'dart:async';
-
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../article_repository.dart';
 import 'model/article_response_model.dart';
 
+part 'home_bloc.freezed.dart';
 part 'home_event.dart';
 part 'home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
-  HomeBloc({required this.articleRepo}) : super(const ArticleLoading()) {
-    on<GetArticle>(_onGetPosts);
+  HomeBloc({required this.articleRepo}) : super(const HomeState.loading()) {
+    on<HomeEvent>(
+      (event, emit) {
+        event.when(getArticle: _onGetArticle);
+      },
+    );
   }
 
   final ArticleRepository articleRepo;
 
-  FutureOr<void> _onGetPosts(GetArticle event, Emitter<HomeState> emit) async {
-    emit(const ArticleLoading());
+  Future<void> _onGetArticle() async {
+    emit(const HomeState.loading());
     try {
       final article = await articleRepo.getArticles();
-      emit(ArticleLoadedSuccess(article));
+      emit(HomeState.success(articles: article));
     } catch (e) {
-      emit(ArticleLoadedFail(e.toString()));
+      emit(HomeState.loadFail(exception: e.toString()));
     }
   }
 }

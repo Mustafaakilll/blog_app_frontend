@@ -1,34 +1,31 @@
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'session_navigator_cubit.freezed.dart';
 
 part 'session_navigator_state.dart';
 
 class SessionNavigatorCubit extends Cubit<SessionNavigatorState> {
-  SessionNavigatorCubit() : super(const HomePage());
+  SessionNavigatorCubit() : super(const SessionNavigatorState.home());
 
   int getPageIndex(SessionNavigatorState state) {
-    switch (state.runtimeType) {
-      case HomePage:
-        return 0;
-      case AddArticlePage:
-        return 1;
-      case ProfilePage:
-        return 2;
-      default:
-        return 0;
-    }
+    return state.when(
+      home: () => 0,
+      profile: () => 2,
+      addArticle: () => 1,
+    );
   }
 
   void setPageIndex(int index) {
     switch (index) {
       case 0:
-        emit(const HomePage());
+        emit(const SessionNavigatorState.home());
         break;
       case 1:
-        emit(const AddArticlePage());
+        emit(const SessionNavigatorState.addArticle());
         break;
       case 2:
-        emit(const ProfilePage());
+        emit(const SessionNavigatorState.profile());
     }
   }
 }

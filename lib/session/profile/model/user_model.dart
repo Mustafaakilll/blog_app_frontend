@@ -1,36 +1,23 @@
-import 'package:json_annotation/json_annotation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
+part 'user_model.freezed.dart';
 part 'user_model.g.dart';
 
-@JsonSerializable()
-class UserModel {
+@freezed
+class UserModel with _$UserModel {
+  const factory UserModel({
+    required int id,
+    required DateTime createdAt,
+    required DateTime updatedAt,
+    required String username,
+    required String email,
+    required String bio,
+    required String image,
+    required List followers,
+    required List articles,
+    required bool following,
+    @Default(false) bool? isMe,
+  }) = _UserModel;
+
   factory UserModel.fromJson(Map<String, dynamic> json) => _$UserModelFromJson(json);
-
-  UserModel({
-    required this.id,
-    required this.createdAt,
-    required this.updatedAt,
-    required this.username,
-    required this.email,
-    required this.bio,
-    required this.image,
-    required this.followers,
-    required this.articles,
-    required this.following,
-  });
-
-  // TODO: REMOVE TOJSON IF NOT NECESSARY
-  Map<String, dynamic> toJson() => _$UserModelToJson(this);
-
-  final int id;
-  final DateTime createdAt;
-  final DateTime updatedAt;
-  final String username;
-  final String email;
-  final String bio;
-  final String image;
-  final List followers;
-  final List articles;
-  bool following;
-  bool? isMe;
 }

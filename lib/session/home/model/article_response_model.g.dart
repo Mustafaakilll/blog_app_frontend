@@ -6,9 +6,9 @@ part of 'article_response_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-ArticleResponseModel _$ArticleResponseModelFromJson(
+_$_ArticleResponseModel _$$_ArticleResponseModelFromJson(
         Map<String, dynamic> json) =>
-    ArticleResponseModel(
+    _$_ArticleResponseModel(
       id: json['id'] as int,
       createdAt: json['createdAt'] as String,
       updatedAt: json['updatedAt'] as String,
@@ -25,8 +25,8 @@ ArticleResponseModel _$ArticleResponseModelFromJson(
       favorited: json['favorited'] as bool,
     );
 
-Map<String, dynamic> _$ArticleResponseModelToJson(
-        ArticleResponseModel instance) =>
+Map<String, dynamic> _$$_ArticleResponseModelToJson(
+        _$_ArticleResponseModel instance) =>
     <String, dynamic>{
       'id': instance.id,
       'createdAt': instance.createdAt,
@@ -41,7 +41,7 @@ Map<String, dynamic> _$ArticleResponseModelToJson(
       'favorited': instance.favorited,
     };
 
-Author _$AuthorFromJson(Map<String, dynamic> json) => Author(
+_$_Author _$$_AuthorFromJson(Map<String, dynamic> json) => _$_Author(
       id: json['id'] as int,
       createdAt: json['createdAt'] as String,
       updatedAt: json['updatedAt'] as String,
@@ -51,7 +51,7 @@ Author _$AuthorFromJson(Map<String, dynamic> json) => Author(
       image: json['image'] as String,
     );
 
-Map<String, dynamic> _$AuthorToJson(Author instance) => <String, dynamic>{
+Map<String, dynamic> _$$_AuthorToJson(_$_Author instance) => <String, dynamic>{
       'id': instance.id,
       'createdAt': instance.createdAt,
       'updatedAt': instance.updatedAt,

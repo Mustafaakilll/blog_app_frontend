@@ -70,7 +70,7 @@ class _TitleField extends StatelessWidget {
     return BlocBuilder<AddArticleBloc, AddArticleState>(
       builder: (context, state) {
         return TextField(
-          onChanged: (value) => context.read<AddArticleBloc>().add(TitleChanged(value)),
+          onChanged: (value) => context.read<AddArticleBloc>().add(AddArticleEvent.titleChanged(value)),
           decoration: InputDecoration(
             labelText: 'Title',
             hintText: 'Write your blog\'s title title here',
@@ -99,7 +99,7 @@ class _ImageField extends StatelessWidget {
                       .push(MaterialPageRoute(builder: (context) => _FullScreenImage(filePath: state.coverImage!))),
                 )
               : GestureDetector(
-                  onTap: () => context.read<AddArticleBloc>().add(const OpenImagePicker()),
+                  onTap: () => context.read<AddArticleBloc>().add(const AddArticleEvent.openImagePicker()),
                   child: Icon(Icons.add_photo_alternate, size: context.highValue)),
         );
       },
@@ -169,7 +169,7 @@ class _DescriptionField extends StatelessWidget {
       builder: (context, state) {
         return Expanded(
           child: TextField(
-            onChanged: (value) => context.read<AddArticleBloc>().add(DescriptionChanged(value)),
+            onChanged: (value) => context.read<AddArticleBloc>().add(AddArticleEvent.descriptionChanged(value)),
             expands: true,
             maxLines: null,
             minLines: null,
@@ -194,8 +194,9 @@ class _SubmitButton extends StatelessWidget {
     return BlocBuilder<AddArticleBloc, AddArticleState>(
       builder: (context, state) {
         return ElevatedButton(
-          onPressed:
-              state.formStatus is FormSubmitting ? null : () => context.read<AddArticleBloc>().add(const AddArticle()),
+          onPressed: state.formStatus is FormSubmitting
+              ? null
+              : () => context.read<AddArticleBloc>().add(const AddArticleEvent.addArticle()),
           child: const Text('Add Article'),
         );
       },

@@ -1,46 +1,14 @@
 part of 'add_article_bloc.dart';
 
-abstract class AddArticleEvent extends Equatable {
-  const AddArticleEvent();
-}
+@freezed
+class AddArticleEvent with _$AddArticleEvent {
+  const factory AddArticleEvent.titleChanged(String title) = _TitleChanged;
 
-class TitleChanged extends AddArticleEvent {
-  const TitleChanged(this.title);
+  const factory AddArticleEvent.descriptionChanged(String description) = _DescriptionChanged;
 
-  final String title;
+  const factory AddArticleEvent.tagsChanged(List<String> tags) = _TagsChanged;
 
-  @override
-  List<Object> get props => [title];
-}
+  const factory AddArticleEvent.openImagePicker() = _OpenImagePicker;
 
-class DescriptionChanged extends AddArticleEvent {
-  const DescriptionChanged(this.description);
-
-  final String description;
-
-  @override
-  List<Object> get props => [description];
-}
-
-class TagsChanged extends AddArticleEvent {
-  const TagsChanged(this.tags);
-
-  final List<String> tags;
-
-  @override
-  List<Object> get props => [tags];
-}
-
-class OpenImagePicker extends AddArticleEvent {
-  const OpenImagePicker();
-
-  @override
-  List<Object> get props => [];
-}
-
-class AddArticle extends AddArticleEvent {
-  const AddArticle();
-
-  @override
-  List<Object> get props => [];
+  const factory AddArticleEvent.addArticle() = _AddArticle;
 }

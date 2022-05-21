@@ -1,47 +1,16 @@
 part of 'home_bloc.dart';
 
-abstract class HomeState extends Equatable {
-  const HomeState();
+@freezed
+class HomeState with _$HomeState {
+  const factory HomeState.loading() = _Loading;
 
-  @override
-  List<Object> get props => [];
-}
+  const factory HomeState.success({required List<ArticleResponseModel> articles}) = _Success;
 
-class ArticleLoading extends HomeState {
-  const ArticleLoading();
-}
+  const factory HomeState.nullArticle() = _Null;
 
-class ArticleLoadedSuccess extends HomeState {
-  const ArticleLoadedSuccess(this.articles);
+  const factory HomeState.loadFail({required String exception}) = _LoadFail;
 
-  final List<ArticleResponseModel> articles;
+  const factory HomeState.likeFail({required String exception}) = _LikeFail;
 
-  @override
-  List<Object> get props => [articles];
-}
-
-class NullArticles extends HomeState {
-  const NullArticles();
-}
-
-class ArticleLoadedFail extends HomeState {
-  const ArticleLoadedFail(this.exception);
-
-  final String exception;
-
-  @override
-  List<Object> get props => [exception];
-}
-
-class ArticleLikeFailed extends HomeState {
-  const ArticleLikeFailed(this.exception);
-
-  final Exception exception;
-
-  @override
-  List<Object> get props => [exception];
-}
-
-class ArticleComment extends HomeState {
-  const ArticleComment();
+  const factory HomeState.comment() = _Comment;
 }

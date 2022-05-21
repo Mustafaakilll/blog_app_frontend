@@ -1,51 +1,58 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../utils/storage_repository.dart';
 import '../user_repository.dart';
 import 'model/user_model.dart';
 
+part 'profile_bloc.freezed.dart';
 part 'profile_event.dart';
 part 'profile_state.dart';
 
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
-  ProfileBloc(this._userRepo, this._storageRepo) : super(const UserFetching()) {
-    on<FetchUser>(_onFetchUser);
-    on<FollowUser>(_onFollowUser);
-    on<UnfollowUser>(_onUnfollowUser);
+  ProfileBloc(this._userRepo, this._storageRepo) : super(const ProfileState.fetching()) {
+    on<ProfileEvent>(
+      (event, emit) {
+        event.when(
+          fetch: _onFetchUser,
+          followUser: _onFollowUser,
+          unfollowUser: _onUnfollowUser,
+        );
+      },
+    );
   }
 
   final UserRepository _userRepo;
   final StorageRepository _storageRepo;
 
-  Future<void> _onFetchUser(FetchUser event, Emitter<ProfileState> emit) async {
-    emit(const UserFetching());
+  Future<void> _onFetchUser() async {
+    emit(const ProfileState.fetching());
     try {
       final userInfo = await _storageRepo.getData<Map<dynamic, dynamic>>('user');
       final user = await _userRepo.getUserByUsername(userInfo);
-      emit(UserFetchedSuccessful(user: user));
+      emit(ProfileState.fetchSuccess(user: user));
     } catch (e) {
-      emit(UserFetchedFailed(error: e.toString()));
+      emit(ProfileState.fetchFail(exception: e.toString()));
     }
   }
 
-  Future<void> _onFollowUser(FollowUser event, Emitter<ProfileState> emit) async {
+  Future<void> _onFollowUser(String username) async {
     try {
-      final user = await _userRepo.followUser(event.username);
-      emit(UserFetchedSuccessful(user: user));
+      final user = await _userRepo.followUser(username);
+      emit(ProfileState.followSuccess(user: user));
     } catch (e) {
-      emit(UserFetchedFailed(error: e.toString()));
+      emit(ProfileState.followFail(exception: e.toString()));
     }
   }
 
-  Future<void> _onUnfollowUser(UnfollowUser event, Emitter<ProfileState> emit) async {
+  Future<void> _onUnfollowUser(String username) async {
     try {
-      final user = await _userRepo.unfollowUser(event.username);
-      emit(UserFetchedSuccessful(user: user));
+      final user = await _userRepo.unfollowUser(username);
+      emit(ProfileState.followSuccess(user: user));
     } catch (e) {
-      emit(UserFetchedFailed(error: e.toString()));
+      emit(ProfileState.followFail(exception: e.toString()));
     }
   }
 }

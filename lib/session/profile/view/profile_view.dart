@@ -19,20 +19,23 @@ class ProfileView extends StatelessWidget {
       create: (context) => ProfileBloc(
         context.read<UserRepository>(),
         context.read<StorageRepository>(),
-      )..add(FetchUser()),
+      )..add(const ProfileEvent.fetch()),
       child: BlocConsumer<ProfileBloc, ProfileState>(
         listener: (context, state) {
-          if (state is UserFollowedFailure) {
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.error)));
-          }
+          state.whenOrNull(
+            followFail: (exception) {
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(exception)));
+            },
+            fetchFail: (exception) {
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(exception)));
+            },
+          );
         },
         builder: (context, state) {
-          if (state is UserFetchedSuccessful) {
-            return const _SuccessBody();
-          } else if (state is UserFetchedFailed) {
-            return _FailureBody(error: state.error.toString());
-          }
-          return const Center(child: CircularProgressIndicator());
+          return state.whenOrNull(
+            fetchSuccess: (user) => const _SuccessBody(),
+            fetchFail: (exception) => _FailureBody(exception: exception),
+          )!;
         },
       ),
     );

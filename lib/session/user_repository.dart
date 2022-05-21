@@ -14,8 +14,8 @@ class UserRepository {
       final result = await dio.get('/${currentUser["username"]}');
       final user = UserModel.fromJson(result.data['profile']);
       // TODO: Figure it out on backend
-      for (final followers in user.followers) if (followers['id'] == currentUser['id']) user.following = true;
-      user.isMe = currentUser['id'] == user.id;
+      for (final followers in user.followers) if (followers['id'] == currentUser['id']) user.copyWith(following: true);
+      user.copyWith(isMe: currentUser['id'] == user.id);
 
       return user;
     } on DioError catch (e) {

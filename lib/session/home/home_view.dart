@@ -17,7 +17,7 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<HomeBloc>(
-      create: (context) => HomeBloc(articleRepo: context.read<ArticleRepository>())..add(const GetArticle()),
+      create: (context) => HomeBloc(articleRepo: context.read<ArticleRepository>())..add(const HomeEvent.getArticle()),
       child: Scaffold(
         appBar: AppBar(
           title: const Text('HOME'),
@@ -35,23 +35,19 @@ class _HomeBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<HomeBloc, HomeState>(
       listener: (context, state) {
-        if (state is ArticleLoadedFail) {
+        state.whenOrNull(loadFail: (e) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(state.exception)),
+            SnackBar(content: Text(e)),
           );
-        }
+        });
       },
       builder: (context, state) {
-        if (state is ArticleLoading) {
-          return const _HomeLoading();
-        } else if (state is ArticleLoadedSuccess) {
-          return _HomeArticleBody(articles: state.articles);
-        } else if (state is ArticleLoadedFail) {
-          debugPrint(state.exception);
-          return _HomeErrorBody(exception: state.exception);
-        } else {
-          return const Center(child: Text('Unknown state'));
-        }
+        return state.maybeWhen(
+          loading: () => const _HomeLoading(),
+          success: (articles) => _HomeArticleBody(articles: articles),
+          loadFail: (exception) => _HomeErrorBody(exception: exception),
+          orElse: () => Center(child: Text('Unknown state: $state')),
+        )!;
       },
     );
   }
