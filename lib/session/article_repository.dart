@@ -19,7 +19,7 @@ class ArticleRepository {
     return article;
   }
 
-  Future<String> uploadImageToCloud(String filePath, String resourceType) async {
+  Future<String> uploadArticleCoverImageToCloud(String filePath, String resourceType) async {
     try {
       final rawData = <String, dynamic>{
         'file': await MultipartFile.fromFile(filePath),

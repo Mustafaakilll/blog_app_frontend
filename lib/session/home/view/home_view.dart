@@ -2,10 +2,12 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../utils/widget_extension.dart';
-import '../article_repository.dart';
-import 'home_bloc.dart';
-import 'model/article_response_model.dart';
+import '../../../core/di/di.dart';
+import '../../../utils/widget_extension.dart';
+import '../bloc/home_bloc.dart';
+import '../model/article_response_model.dart';
+
+//TODO: LOOK HERE FOR POSTS VIEW
 
 class HomeView extends StatelessWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -17,7 +19,7 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<HomeBloc>(
-      create: (context) => HomeBloc(articleRepo: context.read<ArticleRepository>())..add(const HomeEvent.getArticle()),
+      create: (context) => locator<HomeBloc>()..add(const HomeEvent.getArticle()),
       child: Scaffold(
         appBar: AppBar(
           title: const Text('HOME'),

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../add_article/view/add_article_view.dart';
-import '../home/home_view.dart';
-import '../profile/view/profile_view.dart';
-import 'session_navigator_cubit.dart';
+import '../../add_article/view/add_article_view.dart';
+import '../../home/view/home_view.dart';
+import '../../profile/view/profile_view.dart';
+import '../bloc/session_navigator_cubit.dart';
 
 class SessionNavigator extends StatelessWidget {
   const SessionNavigator({Key? key}) : super(key: key);

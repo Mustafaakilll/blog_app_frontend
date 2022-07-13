@@ -3,10 +3,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../core/di/di.dart';
 import '../../../utils/utils.dart';
-import '../../article_repository.dart';
-import '../../navigator/session_navigator_cubit.dart';
-import '../add_article_bloc.dart';
+import '../bloc/add_article_bloc.dart';
 
 class AddArticleView extends StatelessWidget {
   const AddArticleView({Key? key}) : super(key: key);
@@ -14,10 +13,7 @@ class AddArticleView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<AddArticleBloc>(
-      create: (context) => AddArticleBloc(
-        articleRepo: context.read<ArticleRepository>(),
-        sessionNavCubit: context.read<SessionNavigatorCubit>(),
-      ),
+      create: (context) => locator<AddArticleBloc>(),
       child: Padding(
         padding: EdgeInsets.all(context.lowValue),
         child: const SafeArea(
@@ -36,11 +32,15 @@ class _AddArticleForm extends StatelessWidget {
     return BlocListener<AddArticleBloc, AddArticleState>(
       listener: (context, state) {
         if (state is SubmissionSuccess) {
-          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Article added')));
+          ScaffoldMessenger.of(context)
+            ..removeCurrentSnackBar()
+            ..showSnackBar(const SnackBar(content: Text('Article added')));
         }
         final formStatus = state.formStatus;
         if (formStatus is SubmissionFailure) {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(formStatus.exception)));
+          ScaffoldMessenger.of(context)
+            ..removeCurrentSnackBar()
+            ..showSnackBar(SnackBar(content: Text(formStatus.exception)));
         }
       },
       child: Column(

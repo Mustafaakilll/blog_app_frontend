@@ -6,50 +6,48 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'app.dart';
 import 'authentication/auth_flow/authentication_cubit.dart';
 import 'authentication/auth_repository.dart';
-import 'core/network/dio_client.dart';
+import 'authentication/login/bloc/login_bloc.dart';
+import 'authentication/signup/bloc/signup_bloc.dart';
+import 'core/bloc/bloc_observer.dart';
+import 'core/di/di.dart';
+import 'session/add_article/bloc/add_article_bloc.dart';
 import 'session/article_repository.dart';
-import 'session/navigator/session_navigator_cubit.dart';
+import 'session/home/bloc/home_bloc.dart';
+import 'session/navigator/bloc/session_navigator_cubit.dart';
+import 'session/profile/bloc/profile_bloc.dart';
 import 'session/user_repository.dart';
 import 'utils/utils.dart';
 
 Future<void> main() async {
+  ErrorWidget.builder = (details) => Center(child: Text(details.exception.toString()));
   await dotenv.load();
   await Hive.initFlutter();
-  runApp(App());
-  // TODO: Add GetIT for Dependency Injection
-  // TODO: ADD FREEZED FOR MDOEL AND BLOC
+  init();
+  BlocOverrides.runZoned(() => runApp(const App()), blocObserver: MyBlocObserver());
+  // TODO: ADD ANY ROUTER PACKAGE
 }
 
 class App extends StatelessWidget {
-  App({Key? key}) : super(key: key);
-
-  final _authDio = BaseDioClient.auth().dio;
-  final _userDio = BaseDioClient.user().dio;
-  final _articleDio = BaseDioClient.article().dio;
-  final _cloudinaryDio = BaseDioClient.cloudinary().dio;
+  const App({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
       providers: [
-        RepositoryProvider(create: (context) => StorageRepository()),
-        RepositoryProvider(
-          create: (context) => ArticleRepository(
-            storageRepo: context.read<StorageRepository>(),
-            cloudinaryDio: _cloudinaryDio,
-            articleDio: _articleDio,
-          ),
-        ),
-        RepositoryProvider(
-            create: (context) => UserRepository(storageRepo: context.read<StorageRepository>(), dio: _userDio)),
-        RepositoryProvider(
-            create: (context) => AuthRepository(storageRepo: context.read<StorageRepository>(), dio: _authDio)),
+        RepositoryProvider(create: (_) => locator<StorageRepository>()),
+        RepositoryProvider(create: (_) => locator<ArticleRepository>()),
+        RepositoryProvider(create: (_) => locator<UserRepository>()),
+        RepositoryProvider(create: (_) => locator<AuthRepository>()),
       ],
       child: MultiBlocProvider(
         providers: [
-          BlocProvider<AuthenticationCubit>(
-              create: (context) => AuthenticationCubit(authRepository: context.read<AuthRepository>())),
-          BlocProvider<SessionNavigatorCubit>(create: (context) => SessionNavigatorCubit()),
+          BlocProvider(create: (_) => locator<AuthenticationCubit>()),
+          BlocProvider(create: (_) => locator<SessionNavigatorCubit>()),
+          BlocProvider<LoginBloc>(create: (_) => locator<LoginBloc>()),
+          BlocProvider<SignupBloc>(create: (_) => locator<SignupBloc>()),
+          BlocProvider<AddArticleBloc>(create: (_) => locator<AddArticleBloc>()),
+          BlocProvider<ProfileBloc>(create: (_) => locator<ProfileBloc>()),
+          BlocProvider<HomeBloc>(create: (_) => locator<HomeBloc>()),
         ],
         child: const MyApp(),
       ),

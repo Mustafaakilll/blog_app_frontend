@@ -1,10 +1,10 @@
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../utils/form_status.dart';
-import '../auth_flow/authentication_cubit.dart';
-import '../auth_repository.dart';
-import 'model/request_signup_model.dart';
+import '../../../utils/form_status.dart';
+import '../../auth_flow/authentication_cubit.dart';
+import '../../auth_repository.dart';
+import '../model/request_signup_model.dart';
 
 part 'signup_bloc.freezed.dart';
 part 'signup_event.dart';
@@ -12,16 +12,14 @@ part 'signup_state.dart';
 
 class SignupBloc extends Bloc<SignupEvent, SignupState> {
   SignupBloc({required this.authenticationCubit, required this.authRepository}) : super(const SignupState.initial()) {
-    on<SignupEvent>(
-      (event, emit) {
-        event.when(
-          usernameChanged: _onUsernameChanged,
-          emailChanged: _onEmailChanged,
-          passwordChanged: _onPasswordChanged,
-          formSubmit: _onFormSubmit,
-        );
-      },
-    );
+    on<SignupEvent>((event, _) {
+      event.when(
+        usernameChanged: _onUsernameChanged,
+        emailChanged: _onEmailChanged,
+        passwordChanged: _onPasswordChanged,
+        formSubmit: _onFormSubmit,
+      );
+    });
   }
 
   final AuthRepository authRepository;

@@ -11,9 +11,7 @@ class _LoginForm extends StatelessWidget {
         if (formStatus is SubmissionFailure) {
           ScaffoldMessenger.of(context)
             ..clearSnackBars()
-            ..showSnackBar(
-              SnackBar(content: Text(formStatus.exception)),
-            );
+            ..showSnackBar(SnackBar(content: Text(formStatus.exception)));
         }
       },
       child: Padding(

@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../core/di/di.dart';
 import '../../../utils/constants.dart';
 import '../../../utils/form_status.dart';
-import '../../auth_flow/authentication_cubit.dart';
-import '../../auth_repository.dart';
 import '../../signup/view/signup_view.dart';
-import '../login_bloc.dart';
+import '../bloc/login_bloc.dart';
 
 part 'login_form.dart';
 
@@ -22,10 +21,7 @@ class LoginView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('Log In')),
       body: BlocProvider<LoginBloc>(
-        create: (context) => LoginBloc(
-          authRepository: context.read<AuthRepository>(),
-          authenticationCubit: context.read<AuthenticationCubit>(),
-        ),
+        create: (context) => locator<LoginBloc>(),
         child: const _LoginForm(),
       ),
     );

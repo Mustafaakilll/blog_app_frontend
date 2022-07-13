@@ -1,13 +1,17 @@
+import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import 'constants.dart';
 
 abstract class IStorageRepository {
   Future<T> getData<T>(String key);
+
   Future<void> setData<T>(String key, T value);
+
   Future<void> clearData();
 }
 
+@immutable
 class StorageRepository extends IStorageRepository {
   final _boxName = AppConstants.authBoxName;
 

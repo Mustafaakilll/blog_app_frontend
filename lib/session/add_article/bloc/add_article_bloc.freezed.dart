@@ -125,15 +125,23 @@ class __$$_TitleChangedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_TitleChanged implements _TitleChanged {
+class _$_TitleChanged with DiagnosticableTreeMixin implements _TitleChanged {
   const _$_TitleChanged(this.title);
 
   @override
   final String title;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'AddArticleEvent.titleChanged(title: $title)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'AddArticleEvent.titleChanged'))
+      ..add(DiagnosticsProperty('title', title));
   }
 
   @override
@@ -277,15 +285,25 @@ class __$$_DescriptionChangedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_DescriptionChanged implements _DescriptionChanged {
+class _$_DescriptionChanged
+    with DiagnosticableTreeMixin
+    implements _DescriptionChanged {
   const _$_DescriptionChanged(this.description);
 
   @override
   final String description;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'AddArticleEvent.descriptionChanged(description: $description)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'AddArticleEvent.descriptionChanged'))
+      ..add(DiagnosticsProperty('description', description));
   }
 
   @override
@@ -432,7 +450,7 @@ class __$$_TagsChangedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_TagsChanged implements _TagsChanged {
+class _$_TagsChanged with DiagnosticableTreeMixin implements _TagsChanged {
   const _$_TagsChanged(final List<String> tags) : _tags = tags;
 
   final List<String> _tags;
@@ -443,8 +461,16 @@ class _$_TagsChanged implements _TagsChanged {
   }
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'AddArticleEvent.tagsChanged(tags: $tags)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'AddArticleEvent.tagsChanged'))
+      ..add(DiagnosticsProperty('tags', tags));
   }
 
   @override
@@ -575,12 +601,21 @@ class __$$_OpenImagePickerCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_OpenImagePicker implements _OpenImagePicker {
+class _$_OpenImagePicker
+    with DiagnosticableTreeMixin
+    implements _OpenImagePicker {
   const _$_OpenImagePicker();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'AddArticleEvent.openImagePicker()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'AddArticleEvent.openImagePicker'));
   }
 
   @override
@@ -698,12 +733,18 @@ class __$$_AddArticleCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_AddArticle implements _AddArticle {
+class _$_AddArticle with DiagnosticableTreeMixin implements _AddArticle {
   const _$_AddArticle();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'AddArticleEvent.addArticle()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties..add(DiagnosticsProperty('type', 'AddArticleEvent.addArticle'));
   }
 
   @override
@@ -802,28 +843,28 @@ abstract class _AddArticle implements AddArticleEvent {
 
 /// @nodoc
 mixin _$AddArticleState {
-  String get title => throw _privateConstructorUsedError;
-  String get description => throw _privateConstructorUsedError;
+  String? get title => throw _privateConstructorUsedError;
+  String? get description => throw _privateConstructorUsedError;
   String? get coverImage => throw _privateConstructorUsedError;
   FormStatus get formStatus => throw _privateConstructorUsedError;
   List<String> get tags => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String title, String description,
+    required TResult Function(String? title, String? description,
             String? coverImage, FormStatus formStatus, List<String> tags)
         initial,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String title, String description, String? coverImage,
+    TResult Function(String? title, String? description, String? coverImage,
             FormStatus formStatus, List<String> tags)?
         initial,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String title, String description, String? coverImage,
+    TResult Function(String? title, String? description, String? coverImage,
             FormStatus formStatus, List<String> tags)?
         initial,
     required TResult orElse(),
@@ -857,8 +898,8 @@ abstract class $AddArticleStateCopyWith<$Res> {
           AddArticleState value, $Res Function(AddArticleState) then) =
       _$AddArticleStateCopyWithImpl<$Res>;
   $Res call(
-      {String title,
-      String description,
+      {String? title,
+      String? description,
       String? coverImage,
       FormStatus formStatus,
       List<String> tags});
@@ -885,11 +926,11 @@ class _$AddArticleStateCopyWithImpl<$Res>
       title: title == freezed
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       description: description == freezed
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       coverImage: coverImage == freezed
           ? _value.coverImage
           : coverImage // ignore: cast_nullable_to_non_nullable
@@ -914,8 +955,8 @@ abstract class _$$_InitialCopyWith<$Res>
       __$$_InitialCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String title,
-      String description,
+      {String? title,
+      String? description,
       String? coverImage,
       FormStatus formStatus,
       List<String> tags});
@@ -942,11 +983,11 @@ class __$$_InitialCopyWithImpl<$Res> extends _$AddArticleStateCopyWithImpl<$Res>
       title: title == freezed
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       description: description == freezed
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       coverImage: coverImage == freezed
           ? _value.coverImage
           : coverImage // ignore: cast_nullable_to_non_nullable
@@ -965,21 +1006,19 @@ class __$$_InitialCopyWithImpl<$Res> extends _$AddArticleStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Initial implements _Initial {
+class _$_Initial with DiagnosticableTreeMixin implements _Initial {
   const _$_Initial(
-      {this.title = '',
-      this.description = '',
+      {this.title,
+      this.description,
       this.coverImage,
       this.formStatus = const InitialFormStatus(),
       final List<String> tags = const []})
       : _tags = tags;
 
   @override
-  @JsonKey()
-  final String title;
+  final String? title;
   @override
-  @JsonKey()
-  final String description;
+  final String? description;
   @override
   final String? coverImage;
   @override
@@ -994,8 +1033,20 @@ class _$_Initial implements _Initial {
   }
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'AddArticleState.initial(title: $title, description: $description, coverImage: $coverImage, formStatus: $formStatus, tags: $tags)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'AddArticleState.initial'))
+      ..add(DiagnosticsProperty('title', title))
+      ..add(DiagnosticsProperty('description', description))
+      ..add(DiagnosticsProperty('coverImage', coverImage))
+      ..add(DiagnosticsProperty('formStatus', formStatus))
+      ..add(DiagnosticsProperty('tags', tags));
   }
 
   @override
@@ -1030,7 +1081,7 @@ class _$_Initial implements _Initial {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String title, String description,
+    required TResult Function(String? title, String? description,
             String? coverImage, FormStatus formStatus, List<String> tags)
         initial,
   }) {
@@ -1040,7 +1091,7 @@ class _$_Initial implements _Initial {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String title, String description, String? coverImage,
+    TResult Function(String? title, String? description, String? coverImage,
             FormStatus formStatus, List<String> tags)?
         initial,
   }) {
@@ -1050,7 +1101,7 @@ class _$_Initial implements _Initial {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String title, String description, String? coverImage,
+    TResult Function(String? title, String? description, String? coverImage,
             FormStatus formStatus, List<String> tags)?
         initial,
     required TResult orElse(),
@@ -1092,16 +1143,16 @@ class _$_Initial implements _Initial {
 
 abstract class _Initial implements AddArticleState {
   const factory _Initial(
-      {final String title,
-      final String description,
+      {final String? title,
+      final String? description,
       final String? coverImage,
       final FormStatus formStatus,
       final List<String> tags}) = _$_Initial;
 
   @override
-  String get title => throw _privateConstructorUsedError;
+  String? get title => throw _privateConstructorUsedError;
   @override
-  String get description => throw _privateConstructorUsedError;
+  String? get description => throw _privateConstructorUsedError;
   @override
   String? get coverImage => throw _privateConstructorUsedError;
   @override

@@ -1,10 +1,10 @@
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../utils/form_status.dart';
-import '../auth_flow/authentication_cubit.dart';
-import '../auth_repository.dart';
-import 'model/request_login_model.dart';
+import '../../../utils/form_status.dart';
+import '../../auth_flow/authentication_cubit.dart';
+import '../../auth_repository.dart';
+import '../model/request_login_model.dart';
 
 part 'login_bloc.freezed.dart';
 part 'login_event.dart';
@@ -12,7 +12,7 @@ part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc({required this.authenticationCubit, required this.authRepository}) : super(const LoginState.initial()) {
-    on<LoginEvent>((event, emit) {
+    on<LoginEvent>((event, _) {
       event.when(
         emailChanged: _onEmailChanged,
         passwordChanged: _onPasswordChanged,

@@ -14,9 +14,10 @@ class AuthRepository {
   Future<void> login(RequestLoginModel credentials) async {
     try {
       final request = await dio.post('/login', data: credentials.toJson());
+      request.data['user']['password'] = credentials.password;
       final response = ResponseLoginModel.fromJson(request.data);
+
       final token = response.token;
-      response.user.copyWith(password: credentials.password);
       final user = response.user.toJson();
 
       await storageRepo.setData<String>('token', token);
@@ -65,9 +66,9 @@ class AuthRepository {
     }
   }
 
-  void logOut() {
+  Future<void> logOut() async {
     try {
-      storageRepo.clearData();
+      await storageRepo.clearData();
     } catch (e) {
       throw Exception(e);
     }

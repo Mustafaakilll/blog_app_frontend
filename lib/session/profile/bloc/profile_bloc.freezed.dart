@@ -21,6 +21,7 @@ mixin _$ProfileEvent {
     required TResult Function() fetch,
     required TResult Function(String username) followUser,
     required TResult Function(String username) unfollowUser,
+    required TResult Function() pickImage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -28,6 +29,7 @@ mixin _$ProfileEvent {
     TResult Function()? fetch,
     TResult Function(String username)? followUser,
     TResult Function(String username)? unfollowUser,
+    TResult Function()? pickImage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -35,6 +37,7 @@ mixin _$ProfileEvent {
     TResult Function()? fetch,
     TResult Function(String username)? followUser,
     TResult Function(String username)? unfollowUser,
+    TResult Function()? pickImage,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -43,6 +46,7 @@ mixin _$ProfileEvent {
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_FollowUser value) followUser,
     required TResult Function(_UnfollowUser value) unfollowUser,
+    required TResult Function(_PickImageEvent value) pickImage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -50,6 +54,7 @@ mixin _$ProfileEvent {
     TResult Function(_Fetch value)? fetch,
     TResult Function(_FollowUser value)? followUser,
     TResult Function(_UnfollowUser value)? unfollowUser,
+    TResult Function(_PickImageEvent value)? pickImage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -57,6 +62,7 @@ mixin _$ProfileEvent {
     TResult Function(_Fetch value)? fetch,
     TResult Function(_FollowUser value)? followUser,
     TResult Function(_UnfollowUser value)? unfollowUser,
+    TResult Function(_PickImageEvent value)? pickImage,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -119,6 +125,7 @@ class _$_Fetch implements _Fetch {
     required TResult Function() fetch,
     required TResult Function(String username) followUser,
     required TResult Function(String username) unfollowUser,
+    required TResult Function() pickImage,
   }) {
     return fetch();
   }
@@ -129,6 +136,7 @@ class _$_Fetch implements _Fetch {
     TResult Function()? fetch,
     TResult Function(String username)? followUser,
     TResult Function(String username)? unfollowUser,
+    TResult Function()? pickImage,
   }) {
     return fetch?.call();
   }
@@ -139,6 +147,7 @@ class _$_Fetch implements _Fetch {
     TResult Function()? fetch,
     TResult Function(String username)? followUser,
     TResult Function(String username)? unfollowUser,
+    TResult Function()? pickImage,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -153,6 +162,7 @@ class _$_Fetch implements _Fetch {
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_FollowUser value) followUser,
     required TResult Function(_UnfollowUser value) unfollowUser,
+    required TResult Function(_PickImageEvent value) pickImage,
   }) {
     return fetch(this);
   }
@@ -163,6 +173,7 @@ class _$_Fetch implements _Fetch {
     TResult Function(_Fetch value)? fetch,
     TResult Function(_FollowUser value)? followUser,
     TResult Function(_UnfollowUser value)? unfollowUser,
+    TResult Function(_PickImageEvent value)? pickImage,
   }) {
     return fetch?.call(this);
   }
@@ -173,6 +184,7 @@ class _$_Fetch implements _Fetch {
     TResult Function(_Fetch value)? fetch,
     TResult Function(_FollowUser value)? followUser,
     TResult Function(_UnfollowUser value)? unfollowUser,
+    TResult Function(_PickImageEvent value)? pickImage,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -253,6 +265,7 @@ class _$_FollowUser implements _FollowUser {
     required TResult Function() fetch,
     required TResult Function(String username) followUser,
     required TResult Function(String username) unfollowUser,
+    required TResult Function() pickImage,
   }) {
     return followUser(username);
   }
@@ -263,6 +276,7 @@ class _$_FollowUser implements _FollowUser {
     TResult Function()? fetch,
     TResult Function(String username)? followUser,
     TResult Function(String username)? unfollowUser,
+    TResult Function()? pickImage,
   }) {
     return followUser?.call(username);
   }
@@ -273,6 +287,7 @@ class _$_FollowUser implements _FollowUser {
     TResult Function()? fetch,
     TResult Function(String username)? followUser,
     TResult Function(String username)? unfollowUser,
+    TResult Function()? pickImage,
     required TResult orElse(),
   }) {
     if (followUser != null) {
@@ -287,6 +302,7 @@ class _$_FollowUser implements _FollowUser {
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_FollowUser value) followUser,
     required TResult Function(_UnfollowUser value) unfollowUser,
+    required TResult Function(_PickImageEvent value) pickImage,
   }) {
     return followUser(this);
   }
@@ -297,6 +313,7 @@ class _$_FollowUser implements _FollowUser {
     TResult Function(_Fetch value)? fetch,
     TResult Function(_FollowUser value)? followUser,
     TResult Function(_UnfollowUser value)? unfollowUser,
+    TResult Function(_PickImageEvent value)? pickImage,
   }) {
     return followUser?.call(this);
   }
@@ -307,6 +324,7 @@ class _$_FollowUser implements _FollowUser {
     TResult Function(_Fetch value)? fetch,
     TResult Function(_FollowUser value)? followUser,
     TResult Function(_UnfollowUser value)? unfollowUser,
+    TResult Function(_PickImageEvent value)? pickImage,
     required TResult orElse(),
   }) {
     if (followUser != null) {
@@ -393,6 +411,7 @@ class _$_UnfollowUser implements _UnfollowUser {
     required TResult Function() fetch,
     required TResult Function(String username) followUser,
     required TResult Function(String username) unfollowUser,
+    required TResult Function() pickImage,
   }) {
     return unfollowUser(username);
   }
@@ -403,6 +422,7 @@ class _$_UnfollowUser implements _UnfollowUser {
     TResult Function()? fetch,
     TResult Function(String username)? followUser,
     TResult Function(String username)? unfollowUser,
+    TResult Function()? pickImage,
   }) {
     return unfollowUser?.call(username);
   }
@@ -413,6 +433,7 @@ class _$_UnfollowUser implements _UnfollowUser {
     TResult Function()? fetch,
     TResult Function(String username)? followUser,
     TResult Function(String username)? unfollowUser,
+    TResult Function()? pickImage,
     required TResult orElse(),
   }) {
     if (unfollowUser != null) {
@@ -427,6 +448,7 @@ class _$_UnfollowUser implements _UnfollowUser {
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_FollowUser value) followUser,
     required TResult Function(_UnfollowUser value) unfollowUser,
+    required TResult Function(_PickImageEvent value) pickImage,
   }) {
     return unfollowUser(this);
   }
@@ -437,6 +459,7 @@ class _$_UnfollowUser implements _UnfollowUser {
     TResult Function(_Fetch value)? fetch,
     TResult Function(_FollowUser value)? followUser,
     TResult Function(_UnfollowUser value)? unfollowUser,
+    TResult Function(_PickImageEvent value)? pickImage,
   }) {
     return unfollowUser?.call(this);
   }
@@ -447,6 +470,7 @@ class _$_UnfollowUser implements _UnfollowUser {
     TResult Function(_Fetch value)? fetch,
     TResult Function(_FollowUser value)? followUser,
     TResult Function(_UnfollowUser value)? unfollowUser,
+    TResult Function(_PickImageEvent value)? pickImage,
     required TResult orElse(),
   }) {
     if (unfollowUser != null) {
@@ -467,6 +491,123 @@ abstract class _UnfollowUser implements ProfileEvent {
 }
 
 /// @nodoc
+abstract class _$$_PickImageEventCopyWith<$Res> {
+  factory _$$_PickImageEventCopyWith(
+          _$_PickImageEvent value, $Res Function(_$_PickImageEvent) then) =
+      __$$_PickImageEventCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_PickImageEventCopyWithImpl<$Res>
+    extends _$ProfileEventCopyWithImpl<$Res>
+    implements _$$_PickImageEventCopyWith<$Res> {
+  __$$_PickImageEventCopyWithImpl(
+      _$_PickImageEvent _value, $Res Function(_$_PickImageEvent) _then)
+      : super(_value, (v) => _then(v as _$_PickImageEvent));
+
+  @override
+  _$_PickImageEvent get _value => super._value as _$_PickImageEvent;
+}
+
+/// @nodoc
+
+class _$_PickImageEvent implements _PickImageEvent {
+  const _$_PickImageEvent();
+
+  @override
+  String toString() {
+    return 'ProfileEvent.pickImage()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_PickImageEvent);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() fetch,
+    required TResult Function(String username) followUser,
+    required TResult Function(String username) unfollowUser,
+    required TResult Function() pickImage,
+  }) {
+    return pickImage();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? fetch,
+    TResult Function(String username)? followUser,
+    TResult Function(String username)? unfollowUser,
+    TResult Function()? pickImage,
+  }) {
+    return pickImage?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? fetch,
+    TResult Function(String username)? followUser,
+    TResult Function(String username)? unfollowUser,
+    TResult Function()? pickImage,
+    required TResult orElse(),
+  }) {
+    if (pickImage != null) {
+      return pickImage();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_FollowUser value) followUser,
+    required TResult Function(_UnfollowUser value) unfollowUser,
+    required TResult Function(_PickImageEvent value) pickImage,
+  }) {
+    return pickImage(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_FollowUser value)? followUser,
+    TResult Function(_UnfollowUser value)? unfollowUser,
+    TResult Function(_PickImageEvent value)? pickImage,
+  }) {
+    return pickImage?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_FollowUser value)? followUser,
+    TResult Function(_UnfollowUser value)? unfollowUser,
+    TResult Function(_PickImageEvent value)? pickImage,
+    required TResult orElse(),
+  }) {
+    if (pickImage != null) {
+      return pickImage(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _PickImageEvent implements ProfileEvent {
+  const factory _PickImageEvent() = _$_PickImageEvent;
+}
+
+/// @nodoc
 mixin _$ProfileState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
@@ -475,6 +616,7 @@ mixin _$ProfileState {
     required TResult Function(UserModel user) fetchSuccess,
     required TResult Function(UserModel user) followSuccess,
     required TResult Function(String exception) followFail,
+    required TResult Function(String imageUrl) pickImage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -484,6 +626,7 @@ mixin _$ProfileState {
     TResult Function(UserModel user)? fetchSuccess,
     TResult Function(UserModel user)? followSuccess,
     TResult Function(String exception)? followFail,
+    TResult Function(String imageUrl)? pickImage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -493,6 +636,7 @@ mixin _$ProfileState {
     TResult Function(UserModel user)? fetchSuccess,
     TResult Function(UserModel user)? followSuccess,
     TResult Function(String exception)? followFail,
+    TResult Function(String imageUrl)? pickImage,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -503,6 +647,7 @@ mixin _$ProfileState {
     required TResult Function(_FetchSuccess value) fetchSuccess,
     required TResult Function(_FollowSuccess value) followSuccess,
     required TResult Function(_FollowFail value) followFail,
+    required TResult Function(_PickImageState value) pickImage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -512,6 +657,7 @@ mixin _$ProfileState {
     TResult Function(_FetchSuccess value)? fetchSuccess,
     TResult Function(_FollowSuccess value)? followSuccess,
     TResult Function(_FollowFail value)? followFail,
+    TResult Function(_PickImageState value)? pickImage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -521,6 +667,7 @@ mixin _$ProfileState {
     TResult Function(_FetchSuccess value)? fetchSuccess,
     TResult Function(_FollowSuccess value)? followSuccess,
     TResult Function(_FollowFail value)? followFail,
+    TResult Function(_PickImageState value)? pickImage,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -587,6 +734,7 @@ class _$_Fetching implements _Fetching {
     required TResult Function(UserModel user) fetchSuccess,
     required TResult Function(UserModel user) followSuccess,
     required TResult Function(String exception) followFail,
+    required TResult Function(String imageUrl) pickImage,
   }) {
     return fetching();
   }
@@ -599,6 +747,7 @@ class _$_Fetching implements _Fetching {
     TResult Function(UserModel user)? fetchSuccess,
     TResult Function(UserModel user)? followSuccess,
     TResult Function(String exception)? followFail,
+    TResult Function(String imageUrl)? pickImage,
   }) {
     return fetching?.call();
   }
@@ -611,6 +760,7 @@ class _$_Fetching implements _Fetching {
     TResult Function(UserModel user)? fetchSuccess,
     TResult Function(UserModel user)? followSuccess,
     TResult Function(String exception)? followFail,
+    TResult Function(String imageUrl)? pickImage,
     required TResult orElse(),
   }) {
     if (fetching != null) {
@@ -627,6 +777,7 @@ class _$_Fetching implements _Fetching {
     required TResult Function(_FetchSuccess value) fetchSuccess,
     required TResult Function(_FollowSuccess value) followSuccess,
     required TResult Function(_FollowFail value) followFail,
+    required TResult Function(_PickImageState value) pickImage,
   }) {
     return fetching(this);
   }
@@ -639,6 +790,7 @@ class _$_Fetching implements _Fetching {
     TResult Function(_FetchSuccess value)? fetchSuccess,
     TResult Function(_FollowSuccess value)? followSuccess,
     TResult Function(_FollowFail value)? followFail,
+    TResult Function(_PickImageState value)? pickImage,
   }) {
     return fetching?.call(this);
   }
@@ -651,6 +803,7 @@ class _$_Fetching implements _Fetching {
     TResult Function(_FetchSuccess value)? fetchSuccess,
     TResult Function(_FollowSuccess value)? followSuccess,
     TResult Function(_FollowFail value)? followFail,
+    TResult Function(_PickImageState value)? pickImage,
     required TResult orElse(),
   }) {
     if (fetching != null) {
@@ -733,6 +886,7 @@ class _$_FetchFail implements _FetchFail {
     required TResult Function(UserModel user) fetchSuccess,
     required TResult Function(UserModel user) followSuccess,
     required TResult Function(String exception) followFail,
+    required TResult Function(String imageUrl) pickImage,
   }) {
     return fetchFail(exception);
   }
@@ -745,6 +899,7 @@ class _$_FetchFail implements _FetchFail {
     TResult Function(UserModel user)? fetchSuccess,
     TResult Function(UserModel user)? followSuccess,
     TResult Function(String exception)? followFail,
+    TResult Function(String imageUrl)? pickImage,
   }) {
     return fetchFail?.call(exception);
   }
@@ -757,6 +912,7 @@ class _$_FetchFail implements _FetchFail {
     TResult Function(UserModel user)? fetchSuccess,
     TResult Function(UserModel user)? followSuccess,
     TResult Function(String exception)? followFail,
+    TResult Function(String imageUrl)? pickImage,
     required TResult orElse(),
   }) {
     if (fetchFail != null) {
@@ -773,6 +929,7 @@ class _$_FetchFail implements _FetchFail {
     required TResult Function(_FetchSuccess value) fetchSuccess,
     required TResult Function(_FollowSuccess value) followSuccess,
     required TResult Function(_FollowFail value) followFail,
+    required TResult Function(_PickImageState value) pickImage,
   }) {
     return fetchFail(this);
   }
@@ -785,6 +942,7 @@ class _$_FetchFail implements _FetchFail {
     TResult Function(_FetchSuccess value)? fetchSuccess,
     TResult Function(_FollowSuccess value)? followSuccess,
     TResult Function(_FollowFail value)? followFail,
+    TResult Function(_PickImageState value)? pickImage,
   }) {
     return fetchFail?.call(this);
   }
@@ -797,6 +955,7 @@ class _$_FetchFail implements _FetchFail {
     TResult Function(_FetchSuccess value)? fetchSuccess,
     TResult Function(_FollowSuccess value)? followSuccess,
     TResult Function(_FollowFail value)? followFail,
+    TResult Function(_PickImageState value)? pickImage,
     required TResult orElse(),
   }) {
     if (fetchFail != null) {
@@ -894,6 +1053,7 @@ class _$_FetchSuccess implements _FetchSuccess {
     required TResult Function(UserModel user) fetchSuccess,
     required TResult Function(UserModel user) followSuccess,
     required TResult Function(String exception) followFail,
+    required TResult Function(String imageUrl) pickImage,
   }) {
     return fetchSuccess(user);
   }
@@ -906,6 +1066,7 @@ class _$_FetchSuccess implements _FetchSuccess {
     TResult Function(UserModel user)? fetchSuccess,
     TResult Function(UserModel user)? followSuccess,
     TResult Function(String exception)? followFail,
+    TResult Function(String imageUrl)? pickImage,
   }) {
     return fetchSuccess?.call(user);
   }
@@ -918,6 +1079,7 @@ class _$_FetchSuccess implements _FetchSuccess {
     TResult Function(UserModel user)? fetchSuccess,
     TResult Function(UserModel user)? followSuccess,
     TResult Function(String exception)? followFail,
+    TResult Function(String imageUrl)? pickImage,
     required TResult orElse(),
   }) {
     if (fetchSuccess != null) {
@@ -934,6 +1096,7 @@ class _$_FetchSuccess implements _FetchSuccess {
     required TResult Function(_FetchSuccess value) fetchSuccess,
     required TResult Function(_FollowSuccess value) followSuccess,
     required TResult Function(_FollowFail value) followFail,
+    required TResult Function(_PickImageState value) pickImage,
   }) {
     return fetchSuccess(this);
   }
@@ -946,6 +1109,7 @@ class _$_FetchSuccess implements _FetchSuccess {
     TResult Function(_FetchSuccess value)? fetchSuccess,
     TResult Function(_FollowSuccess value)? followSuccess,
     TResult Function(_FollowFail value)? followFail,
+    TResult Function(_PickImageState value)? pickImage,
   }) {
     return fetchSuccess?.call(this);
   }
@@ -958,6 +1122,7 @@ class _$_FetchSuccess implements _FetchSuccess {
     TResult Function(_FetchSuccess value)? fetchSuccess,
     TResult Function(_FollowSuccess value)? followSuccess,
     TResult Function(_FollowFail value)? followFail,
+    TResult Function(_PickImageState value)? pickImage,
     required TResult orElse(),
   }) {
     if (fetchSuccess != null) {
@@ -1056,6 +1221,7 @@ class _$_FollowSuccess implements _FollowSuccess {
     required TResult Function(UserModel user) fetchSuccess,
     required TResult Function(UserModel user) followSuccess,
     required TResult Function(String exception) followFail,
+    required TResult Function(String imageUrl) pickImage,
   }) {
     return followSuccess(user);
   }
@@ -1068,6 +1234,7 @@ class _$_FollowSuccess implements _FollowSuccess {
     TResult Function(UserModel user)? fetchSuccess,
     TResult Function(UserModel user)? followSuccess,
     TResult Function(String exception)? followFail,
+    TResult Function(String imageUrl)? pickImage,
   }) {
     return followSuccess?.call(user);
   }
@@ -1080,6 +1247,7 @@ class _$_FollowSuccess implements _FollowSuccess {
     TResult Function(UserModel user)? fetchSuccess,
     TResult Function(UserModel user)? followSuccess,
     TResult Function(String exception)? followFail,
+    TResult Function(String imageUrl)? pickImage,
     required TResult orElse(),
   }) {
     if (followSuccess != null) {
@@ -1096,6 +1264,7 @@ class _$_FollowSuccess implements _FollowSuccess {
     required TResult Function(_FetchSuccess value) fetchSuccess,
     required TResult Function(_FollowSuccess value) followSuccess,
     required TResult Function(_FollowFail value) followFail,
+    required TResult Function(_PickImageState value) pickImage,
   }) {
     return followSuccess(this);
   }
@@ -1108,6 +1277,7 @@ class _$_FollowSuccess implements _FollowSuccess {
     TResult Function(_FetchSuccess value)? fetchSuccess,
     TResult Function(_FollowSuccess value)? followSuccess,
     TResult Function(_FollowFail value)? followFail,
+    TResult Function(_PickImageState value)? pickImage,
   }) {
     return followSuccess?.call(this);
   }
@@ -1120,6 +1290,7 @@ class _$_FollowSuccess implements _FollowSuccess {
     TResult Function(_FetchSuccess value)? fetchSuccess,
     TResult Function(_FollowSuccess value)? followSuccess,
     TResult Function(_FollowFail value)? followFail,
+    TResult Function(_PickImageState value)? pickImage,
     required TResult orElse(),
   }) {
     if (followSuccess != null) {
@@ -1208,6 +1379,7 @@ class _$_FollowFail implements _FollowFail {
     required TResult Function(UserModel user) fetchSuccess,
     required TResult Function(UserModel user) followSuccess,
     required TResult Function(String exception) followFail,
+    required TResult Function(String imageUrl) pickImage,
   }) {
     return followFail(exception);
   }
@@ -1220,6 +1392,7 @@ class _$_FollowFail implements _FollowFail {
     TResult Function(UserModel user)? fetchSuccess,
     TResult Function(UserModel user)? followSuccess,
     TResult Function(String exception)? followFail,
+    TResult Function(String imageUrl)? pickImage,
   }) {
     return followFail?.call(exception);
   }
@@ -1232,6 +1405,7 @@ class _$_FollowFail implements _FollowFail {
     TResult Function(UserModel user)? fetchSuccess,
     TResult Function(UserModel user)? followSuccess,
     TResult Function(String exception)? followFail,
+    TResult Function(String imageUrl)? pickImage,
     required TResult orElse(),
   }) {
     if (followFail != null) {
@@ -1248,6 +1422,7 @@ class _$_FollowFail implements _FollowFail {
     required TResult Function(_FetchSuccess value) fetchSuccess,
     required TResult Function(_FollowSuccess value) followSuccess,
     required TResult Function(_FollowFail value) followFail,
+    required TResult Function(_PickImageState value) pickImage,
   }) {
     return followFail(this);
   }
@@ -1260,6 +1435,7 @@ class _$_FollowFail implements _FollowFail {
     TResult Function(_FetchSuccess value)? fetchSuccess,
     TResult Function(_FollowSuccess value)? followSuccess,
     TResult Function(_FollowFail value)? followFail,
+    TResult Function(_PickImageState value)? pickImage,
   }) {
     return followFail?.call(this);
   }
@@ -1272,6 +1448,7 @@ class _$_FollowFail implements _FollowFail {
     TResult Function(_FetchSuccess value)? fetchSuccess,
     TResult Function(_FollowSuccess value)? followSuccess,
     TResult Function(_FollowFail value)? followFail,
+    TResult Function(_PickImageState value)? pickImage,
     required TResult orElse(),
   }) {
     if (followFail != null) {
@@ -1287,5 +1464,164 @@ abstract class _FollowFail implements ProfileState {
   String get exception => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$$_FollowFailCopyWith<_$_FollowFail> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_PickImageStateCopyWith<$Res> {
+  factory _$$_PickImageStateCopyWith(
+          _$_PickImageState value, $Res Function(_$_PickImageState) then) =
+      __$$_PickImageStateCopyWithImpl<$Res>;
+  $Res call({String imageUrl});
+}
+
+/// @nodoc
+class __$$_PickImageStateCopyWithImpl<$Res>
+    extends _$ProfileStateCopyWithImpl<$Res>
+    implements _$$_PickImageStateCopyWith<$Res> {
+  __$$_PickImageStateCopyWithImpl(
+      _$_PickImageState _value, $Res Function(_$_PickImageState) _then)
+      : super(_value, (v) => _then(v as _$_PickImageState));
+
+  @override
+  _$_PickImageState get _value => super._value as _$_PickImageState;
+
+  @override
+  $Res call({
+    Object? imageUrl = freezed,
+  }) {
+    return _then(_$_PickImageState(
+      imageUrl: imageUrl == freezed
+          ? _value.imageUrl
+          : imageUrl // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_PickImageState implements _PickImageState {
+  const _$_PickImageState({required this.imageUrl});
+
+  @override
+  final String imageUrl;
+
+  @override
+  String toString() {
+    return 'ProfileState.pickImage(imageUrl: $imageUrl)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_PickImageState &&
+            const DeepCollectionEquality().equals(other.imageUrl, imageUrl));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(imageUrl));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$_PickImageStateCopyWith<_$_PickImageState> get copyWith =>
+      __$$_PickImageStateCopyWithImpl<_$_PickImageState>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() fetching,
+    required TResult Function(String exception) fetchFail,
+    required TResult Function(UserModel user) fetchSuccess,
+    required TResult Function(UserModel user) followSuccess,
+    required TResult Function(String exception) followFail,
+    required TResult Function(String imageUrl) pickImage,
+  }) {
+    return pickImage(imageUrl);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? fetching,
+    TResult Function(String exception)? fetchFail,
+    TResult Function(UserModel user)? fetchSuccess,
+    TResult Function(UserModel user)? followSuccess,
+    TResult Function(String exception)? followFail,
+    TResult Function(String imageUrl)? pickImage,
+  }) {
+    return pickImage?.call(imageUrl);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? fetching,
+    TResult Function(String exception)? fetchFail,
+    TResult Function(UserModel user)? fetchSuccess,
+    TResult Function(UserModel user)? followSuccess,
+    TResult Function(String exception)? followFail,
+    TResult Function(String imageUrl)? pickImage,
+    required TResult orElse(),
+  }) {
+    if (pickImage != null) {
+      return pickImage(imageUrl);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Fetching value) fetching,
+    required TResult Function(_FetchFail value) fetchFail,
+    required TResult Function(_FetchSuccess value) fetchSuccess,
+    required TResult Function(_FollowSuccess value) followSuccess,
+    required TResult Function(_FollowFail value) followFail,
+    required TResult Function(_PickImageState value) pickImage,
+  }) {
+    return pickImage(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Fetching value)? fetching,
+    TResult Function(_FetchFail value)? fetchFail,
+    TResult Function(_FetchSuccess value)? fetchSuccess,
+    TResult Function(_FollowSuccess value)? followSuccess,
+    TResult Function(_FollowFail value)? followFail,
+    TResult Function(_PickImageState value)? pickImage,
+  }) {
+    return pickImage?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Fetching value)? fetching,
+    TResult Function(_FetchFail value)? fetchFail,
+    TResult Function(_FetchSuccess value)? fetchSuccess,
+    TResult Function(_FollowSuccess value)? followSuccess,
+    TResult Function(_FollowFail value)? followFail,
+    TResult Function(_PickImageState value)? pickImage,
+    required TResult orElse(),
+  }) {
+    if (pickImage != null) {
+      return pickImage(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _PickImageState implements ProfileState {
+  const factory _PickImageState({required final String imageUrl}) =
+      _$_PickImageState;
+
+  String get imageUrl => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  _$$_PickImageStateCopyWith<_$_PickImageState> get copyWith =>
       throw _privateConstructorUsedError;
 }

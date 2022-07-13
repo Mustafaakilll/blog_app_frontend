@@ -9,14 +9,18 @@ class BaseDioClient {
   }
 
   BaseDioClient.user() {
+    _dio.interceptors.add(AuthInterceptor());
     _dio.options.baseUrl = dotenv.get('USER_ENDPOINT');
   }
 
   BaseDioClient.article() {
+    _dio.interceptors.add(AuthInterceptor());
+
     _dio.options.baseUrl = dotenv.get('ARTICLE_ENDPOINT');
   }
 
   BaseDioClient.cloudinary() {
+    _dio.interceptors.add(AuthInterceptor());
     final cloudinaryUrl = dotenv.get('CLOUDINARY_URL');
     final cloudName = dotenv.get('CLOUD_NAME');
     _dio.options.baseUrl = '$cloudinaryUrl$cloudName';
@@ -24,5 +28,5 @@ class BaseDioClient {
 
   final Dio _dio = Dio();
 
-  Dio get dio => _dio..interceptors.add(AuthInterceptor());
+  Dio get dio => _dio;
 }

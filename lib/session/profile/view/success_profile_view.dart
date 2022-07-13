@@ -11,11 +11,12 @@ class _SuccessBody extends StatelessWidget {
         context.emptySizedHeightBoxHigh,
         _userAvatar(),
         _userInfo(),
+        _editButton(),
       ],
     );
   }
 
-  BlocBuilder<ProfileBloc, ProfileState> _appBar() {
+  Widget _appBar() {
     return BlocBuilder<ProfileBloc, ProfileState>(
       builder: (context, state) {
         return state.whenOrNull(
@@ -35,12 +36,12 @@ class _SuccessBody extends StatelessWidget {
       visible: isMe,
       child: IconButton(
         icon: const Icon(Icons.exit_to_app),
-        onPressed: () => context.read<AuthRepository>().logOut(),
+        onPressed: () => locator<AuthRepository>().logOut(),
       ),
     );
   }
 
-  BlocBuilder<ProfileBloc, ProfileState> _userAvatar() {
+  Widget _userAvatar() {
     return BlocBuilder<ProfileBloc, ProfileState>(builder: (context, state) {
       return state.whenOrNull(
           fetchSuccess: (user) => CircleAvatar(
@@ -50,31 +51,58 @@ class _SuccessBody extends StatelessWidget {
     });
   }
 
-  BlocBuilder<ProfileBloc, ProfileState> _userInfo() {
+  Widget _userInfo() {
     return BlocBuilder<ProfileBloc, ProfileState>(
       builder: (context, state) {
         return state.whenOrNull(
-            fetchSuccess: (user) => Column(
-                  children: [
-                    context.emptySizedHeightBoxLow,
-                    Text(user.username),
-                    context.emptySizedHeightBoxLow,
-                    Text(user.email),
-                    context.emptySizedHeightBoxLow,
-                    Text('Followers: ${user.followers.length}'),
-                    user.isMe!
-                        ? Container()
-                        : user.following
-                            ? TextButton(
-                                onPressed: () =>
-                                    context.read<ProfileBloc>().add(ProfileEvent.unfollowUser(username: user.username)),
-                                child: const Text('Unfollow'))
-                            : TextButton(
-                                onPressed: () =>
-                                    context.read<ProfileBloc>().add(ProfileEvent.followUser(username: user.username)),
-                                child: const Text('Follow')),
-                  ],
-                ))!;
+          fetchSuccess: (user) => Column(
+            children: [
+              context.emptySizedHeightBoxLow,
+              Text(user.username),
+              context.emptySizedHeightBoxLow,
+              Text(user.email),
+              context.emptySizedHeightBoxLow,
+              Text(user.bio),
+              // Visibility(visible: (user.bio.length < 0), child: Text(user.bio)),
+              context.emptySizedHeightBoxLow,
+              Text('Followers: ${user.followers.length}'),
+              context.emptySizedHeightBoxLow,
+              Visibility(visible: !(user.isMe!), child: _followButton(user.following, user.username)),
+            ],
+          ),
+        )!;
+      },
+    );
+  }
+
+  Widget _followButton(bool following, String username) {
+    return following
+        ? TextButton(
+            onPressed: () => locator<ProfileBloc>().add(ProfileEvent.unfollowUser(username: username)),
+            child: const Text('Unfollow'),
+          )
+        : TextButton(
+            onPressed: () => locator<ProfileBloc>().add(ProfileEvent.followUser(username: username)),
+            child: const Text('Follow'),
+          );
+  }
+
+  Widget _editButton() {
+    return BlocBuilder<ProfileBloc, ProfileState>(
+      builder: (context, state) {
+        return Visibility(
+          visible: state.whenOrNull(fetchSuccess: (user) => user.isMe!)!,
+          child: ElevatedButton(
+            onPressed: () {
+              AppConstants.navKey.currentState
+                  ?.push(EditProfileView.route(context.read<ProfileBloc>().user))
+                  .whenComplete(() {
+                context.read<ProfileBloc>().add(const ProfileEvent.fetch());
+              });
+            },
+            child: const Text('Edit'),
+          ),
+        );
       },
     );
   }

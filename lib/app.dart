@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'authentication/auth_flow/authentication_cubit.dart';
 import 'authentication/login/view/login_view.dart';
-import 'session/navigator/session_navigator.dart';
+import 'session/navigator/view/session_navigator.dart';
 import 'splash/splash_view.dart';
 import 'utils/utils.dart';
 
@@ -15,7 +15,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       navigatorKey: AppConstants.navKey,
       title: 'Flutter Demo',
-      theme: ThemeData.dark(),
+      theme: ThemeData(
+        colorScheme: darkColorScheme,
+        useMaterial3: true,
+        bottomNavigationBarTheme: const BottomNavigationBarThemeData(selectedItemColor: Color(0xff66dbb3)),
+      ),
       builder: (_, child) {
         return BlocListener<AuthenticationCubit, AuthenticationState>(
           listener: (_, state) {

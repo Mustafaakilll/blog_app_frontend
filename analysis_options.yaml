@@ -1,5 +1,10 @@
 include: package:flutter_lints/flutter.yaml
 
+analyzer:
+  exclude:
+    - lib/**/*.freezed.dart
+    - lib/**/*.g.dart
+
 linter:
   rules:
     - always_declare_return_types
@@ -66,5 +71,3 @@ linter:
     - use_rethrow_when_possible
     - use_setters_to_change_properties
     - valid_regexps
-    - depend_on_referenced_packages
-
