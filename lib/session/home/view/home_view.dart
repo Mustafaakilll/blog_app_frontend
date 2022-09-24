@@ -98,17 +98,17 @@ class _HomeArticleBody extends StatelessWidget {
       ],
     );
   }
-}
 
-Widget _articleImage(ArticleResponseModel article) {
-  return AspectRatio(aspectRatio: 4 / 5, child: CachedNetworkImage(imageUrl: article.coverImage));
-}
+  Widget _articleImage(ArticleResponseModel article) {
+    return AspectRatio(aspectRatio: 4 / 5, child: CachedNetworkImage(imageUrl: article.coverImage));
+  }
 
-Widget _articleDetail(ArticleResponseModel article) {
-  return ListTile(
-    title: Text(article.title),
-    subtitle: Text(article.body),
-  );
+  Widget _articleDetail(ArticleResponseModel article) {
+    return ListTile(
+      title: Text(article.title),
+      subtitle: Text(article.body),
+    );
+  }
 }
 
 class _HomeErrorBody extends StatelessWidget {

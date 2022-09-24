@@ -322,7 +322,9 @@ class _$_UserModel implements _UserModel {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_UserModelToJson(this);
+    return _$$_UserModelToJson(
+      this,
+    );
   }
 }
 
@@ -344,27 +346,27 @@ abstract class _UserModel implements UserModel {
       _$_UserModel.fromJson;
 
   @override
-  int get id => throw _privateConstructorUsedError;
+  int get id;
   @override
-  DateTime get createdAt => throw _privateConstructorUsedError;
+  DateTime get createdAt;
   @override
-  DateTime get updatedAt => throw _privateConstructorUsedError;
+  DateTime get updatedAt;
   @override
-  String get username => throw _privateConstructorUsedError;
+  String get username;
   @override
-  String get email => throw _privateConstructorUsedError;
+  String get email;
   @override
-  String get bio => throw _privateConstructorUsedError;
+  String get bio;
   @override
-  String get image => throw _privateConstructorUsedError;
+  String get image;
   @override
-  List<dynamic> get followers => throw _privateConstructorUsedError;
+  List<dynamic> get followers;
   @override
-  List<dynamic> get articles => throw _privateConstructorUsedError;
+  List<dynamic> get articles;
   @override
-  bool get following => throw _privateConstructorUsedError;
+  bool get following;
   @override
-  bool? get isMe => throw _privateConstructorUsedError;
+  bool? get isMe;
   @override
   @JsonKey(ignore: true)
   _$$_UserModelCopyWith<_$_UserModel> get copyWith =>

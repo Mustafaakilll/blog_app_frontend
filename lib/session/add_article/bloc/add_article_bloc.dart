@@ -15,13 +15,13 @@ part 'add_article_state.dart';
 class AddArticleBloc extends Bloc<AddArticleEvent, AddArticleState> {
   AddArticleBloc({required this.picker, required this.sessionNavCubit, required this.articleRepo})
       : super(const AddArticleState.initial()) {
-    on<AddArticleEvent>((event, _) {
+    on<AddArticleEvent>((event, emit) {
       event.when(
-        titleChanged: _onTitleChanged,
-        descriptionChanged: _onDescriptionChanged,
-        tagsChanged: _onTagsChanged,
-        openImagePicker: _onOpenImagePicker,
-        addArticle: _onAddArticle,
+        titleChanged: (title) => _onTitleChanged(title, emit),
+        descriptionChanged: (description) => _onDescriptionChanged(description, emit),
+        tagsChanged: (tags) => _onTagsChanged(tags, emit),
+        openImagePicker: () => _onOpenImagePicker(emit),
+        addArticle: () => _onAddArticle(emit),
       );
     });
   }
@@ -30,25 +30,25 @@ class AddArticleBloc extends Bloc<AddArticleEvent, AddArticleState> {
   final ArticleRepository articleRepo;
   final SessionNavigatorCubit sessionNavCubit;
 
-  void _onTitleChanged(String title) {
+  void _onTitleChanged(String title, Emitter<AddArticleState> emit) {
     emit(state.copyWith(title: title));
   }
 
-  void _onDescriptionChanged(String description) {
+  void _onDescriptionChanged(String description, Emitter<AddArticleState> emit) {
     emit(state.copyWith(description: description));
   }
 
-  void _onTagsChanged(List<String> tags) {
+  void _onTagsChanged(List<String> tags, Emitter<AddArticleState> emit) {
     emit(state.copyWith(tags: tags));
   }
 
-  Future<void> _onOpenImagePicker() async {
-    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+  Future<void> _onOpenImagePicker(Emitter<AddArticleState> emit) async {
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
     if (pickedFile == null) return;
     emit(state.copyWith(coverImage: pickedFile.path));
   }
 
-  Future<void> _onAddArticle() async {
+  Future<void> _onAddArticle(Emitter<AddArticleState> emit) async {
     emit(state.copyWith(formStatus: const FormSubmitting()));
     try {
       _checkNullableValues();

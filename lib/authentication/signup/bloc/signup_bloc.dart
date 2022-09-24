@@ -12,12 +12,12 @@ part 'signup_state.dart';
 
 class SignupBloc extends Bloc<SignupEvent, SignupState> {
   SignupBloc({required this.authenticationCubit, required this.authRepository}) : super(const SignupState.initial()) {
-    on<SignupEvent>((event, _) {
+    on<SignupEvent>((event, emit) {
       event.when(
-        usernameChanged: _onUsernameChanged,
-        emailChanged: _onEmailChanged,
-        passwordChanged: _onPasswordChanged,
-        formSubmit: _onFormSubmit,
+        usernameChanged: (username) => _onUsernameChanged(username, emit),
+        emailChanged: (email) => _onEmailChanged(email, emit),
+        passwordChanged: (password) => _onPasswordChanged(password, emit),
+        formSubmit: () => _onFormSubmit(emit),
       );
     });
   }
@@ -25,19 +25,19 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
   final AuthRepository authRepository;
   final AuthenticationCubit authenticationCubit;
 
-  void _onEmailChanged(String email) {
+  void _onEmailChanged(String email, Emitter<SignupState> emit) {
     emit(state.copyWith(email: email));
   }
 
-  void _onUsernameChanged(String username) {
+  void _onUsernameChanged(String username, Emitter<SignupState> emit) {
     emit(state.copyWith(username: username));
   }
 
-  void _onPasswordChanged(String password) {
+  void _onPasswordChanged(String password, Emitter<SignupState> emit) {
     emit(state.copyWith(password: password));
   }
 
-  Future<void> _onFormSubmit() async {
+  Future<void> _onFormSubmit(Emitter<SignupState> emit) async {
     emit(state.copyWith(formStatus: const FormSubmitting()));
     try {
       await authRepository

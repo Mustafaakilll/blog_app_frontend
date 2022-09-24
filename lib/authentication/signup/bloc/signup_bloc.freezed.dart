@@ -225,7 +225,7 @@ abstract class _UsernameChanged implements SignupEvent {
   const factory _UsernameChanged({required final String username}) =
       _$_UsernameChanged;
 
-  String get username => throw _privateConstructorUsedError;
+  String get username;
   @JsonKey(ignore: true)
   _$$_UsernameChangedCopyWith<_$_UsernameChanged> get copyWith =>
       throw _privateConstructorUsedError;
@@ -371,7 +371,7 @@ class _$_EmailChanged implements _EmailChanged {
 abstract class _EmailChanged implements SignupEvent {
   const factory _EmailChanged({required final String email}) = _$_EmailChanged;
 
-  String get email => throw _privateConstructorUsedError;
+  String get email;
   @JsonKey(ignore: true)
   _$$_EmailChangedCopyWith<_$_EmailChanged> get copyWith =>
       throw _privateConstructorUsedError;
@@ -518,7 +518,7 @@ abstract class _PasswordChanged implements SignupEvent {
   const factory _PasswordChanged({required final String password}) =
       _$_PasswordChanged;
 
-  String get password => throw _privateConstructorUsedError;
+  String get password;
   @JsonKey(ignore: true)
   _$$_PasswordChangedCopyWith<_$_PasswordChanged> get copyWith =>
       throw _privateConstructorUsedError;
@@ -904,13 +904,13 @@ abstract class Initial implements SignupState {
       final FormStatus formStatus}) = _$Initial;
 
   @override
-  String get email => throw _privateConstructorUsedError;
+  String get email;
   @override
-  String get username => throw _privateConstructorUsedError;
+  String get username;
   @override
-  String get password => throw _privateConstructorUsedError;
+  String get password;
   @override
-  FormStatus get formStatus => throw _privateConstructorUsedError;
+  FormStatus get formStatus;
   @override
   @JsonKey(ignore: true)
   _$$InitialCopyWith<_$Initial> get copyWith =>

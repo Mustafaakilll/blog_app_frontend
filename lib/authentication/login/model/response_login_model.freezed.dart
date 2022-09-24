@@ -157,7 +157,9 @@ class _$_ResponseLoginModel implements _ResponseLoginModel {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ResponseLoginModelToJson(this);
+    return _$$_ResponseLoginModelToJson(
+      this,
+    );
   }
 }
 
@@ -170,9 +172,9 @@ abstract class _ResponseLoginModel implements ResponseLoginModel {
       _$_ResponseLoginModel.fromJson;
 
   @override
-  User get user => throw _privateConstructorUsedError;
+  User get user;
   @override
-  String get token => throw _privateConstructorUsedError;
+  String get token;
   @override
   @JsonKey(ignore: true)
   _$$_ResponseLoginModelCopyWith<_$_ResponseLoginModel> get copyWith =>
@@ -416,7 +418,9 @@ class _$_User implements _User {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_UserToJson(this);
+    return _$$_UserToJson(
+      this,
+    );
   }
 }
 
@@ -434,21 +438,21 @@ abstract class _User implements User {
   factory _User.fromJson(Map<String, dynamic> json) = _$_User.fromJson;
 
   @override
-  int get id => throw _privateConstructorUsedError;
+  int get id;
   @override
-  String get password => throw _privateConstructorUsedError;
+  String get password;
   @override
-  String get username => throw _privateConstructorUsedError;
+  String get username;
   @override
-  String get email => throw _privateConstructorUsedError;
+  String get email;
   @override
-  String get bio => throw _privateConstructorUsedError;
+  String get bio;
   @override
-  String get image => throw _privateConstructorUsedError;
+  String get image;
   @override
-  String get createdAt => throw _privateConstructorUsedError;
+  String get createdAt;
   @override
-  String get updatedAt => throw _privateConstructorUsedError;
+  String get updatedAt;
   @override
   @JsonKey(ignore: true)
   _$$_UserCopyWith<_$_User> get copyWith => throw _privateConstructorUsedError;

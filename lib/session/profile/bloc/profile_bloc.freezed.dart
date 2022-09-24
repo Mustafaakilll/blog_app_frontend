@@ -337,7 +337,7 @@ class _$_FollowUser implements _FollowUser {
 abstract class _FollowUser implements ProfileEvent {
   const factory _FollowUser({required final String username}) = _$_FollowUser;
 
-  String get username => throw _privateConstructorUsedError;
+  String get username;
   @JsonKey(ignore: true)
   _$$_FollowUserCopyWith<_$_FollowUser> get copyWith =>
       throw _privateConstructorUsedError;
@@ -484,7 +484,7 @@ abstract class _UnfollowUser implements ProfileEvent {
   const factory _UnfollowUser({required final String username}) =
       _$_UnfollowUser;
 
-  String get username => throw _privateConstructorUsedError;
+  String get username;
   @JsonKey(ignore: true)
   _$$_UnfollowUserCopyWith<_$_UnfollowUser> get copyWith =>
       throw _privateConstructorUsedError;
@@ -968,7 +968,7 @@ class _$_FetchFail implements _FetchFail {
 abstract class _FetchFail implements ProfileState {
   const factory _FetchFail({required final String exception}) = _$_FetchFail;
 
-  String get exception => throw _privateConstructorUsedError;
+  String get exception;
   @JsonKey(ignore: true)
   _$$_FetchFailCopyWith<_$_FetchFail> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1136,7 +1136,7 @@ abstract class _FetchSuccess implements ProfileState {
   const factory _FetchSuccess({required final UserModel user}) =
       _$_FetchSuccess;
 
-  UserModel get user => throw _privateConstructorUsedError;
+  UserModel get user;
   @JsonKey(ignore: true)
   _$$_FetchSuccessCopyWith<_$_FetchSuccess> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1304,7 +1304,7 @@ abstract class _FollowSuccess implements ProfileState {
   const factory _FollowSuccess({required final UserModel user}) =
       _$_FollowSuccess;
 
-  UserModel get user => throw _privateConstructorUsedError;
+  UserModel get user;
   @JsonKey(ignore: true)
   _$$_FollowSuccessCopyWith<_$_FollowSuccess> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1461,7 +1461,7 @@ class _$_FollowFail implements _FollowFail {
 abstract class _FollowFail implements ProfileState {
   const factory _FollowFail({required final String exception}) = _$_FollowFail;
 
-  String get exception => throw _privateConstructorUsedError;
+  String get exception;
   @JsonKey(ignore: true)
   _$$_FollowFailCopyWith<_$_FollowFail> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1620,7 +1620,7 @@ abstract class _PickImageState implements ProfileState {
   const factory _PickImageState({required final String imageUrl}) =
       _$_PickImageState;
 
-  String get imageUrl => throw _privateConstructorUsedError;
+  String get imageUrl;
   @JsonKey(ignore: true)
   _$$_PickImageStateCopyWith<_$_PickImageState> get copyWith =>
       throw _privateConstructorUsedError;

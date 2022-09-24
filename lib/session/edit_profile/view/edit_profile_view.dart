@@ -78,13 +78,15 @@ class EditProfileView extends StatelessWidget {
                       ),
                     ),
                     context.emptySizedHeightBoxLow,
-                    TextButton(
-                      onPressed: () {
-                        final oldUser = EditProfileModel(email: user.email, bio: user.bio, image: user.image);
-                        context.read<EditProfileBloc>().add(EditProfileEvent.saveUser(oldUser));
-                      },
-                      child: const Text('Save'),
-                    ),
+                    state.formStatus == const FormSubmitting()
+                        ? const CircularProgressIndicator()
+                        : TextButton(
+                            onPressed: () {
+                              final oldUser = EditProfileModel(email: user.email, bio: user.bio, image: user.image);
+                              context.read<EditProfileBloc>().add(EditProfileEvent.saveUser(oldUser));
+                            },
+                            child: const Text('Save'),
+                          )
                   ],
                 ),
               ),

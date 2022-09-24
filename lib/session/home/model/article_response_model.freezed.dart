@@ -342,7 +342,9 @@ class _$_ArticleResponseModel implements _ArticleResponseModel {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ArticleResponseModelToJson(this);
+    return _$$_ArticleResponseModelToJson(
+      this,
+    );
   }
 }
 
@@ -364,27 +366,27 @@ abstract class _ArticleResponseModel implements ArticleResponseModel {
       _$_ArticleResponseModel.fromJson;
 
   @override
-  int get id => throw _privateConstructorUsedError;
+  int get id;
   @override
-  String get createdAt => throw _privateConstructorUsedError;
+  String get createdAt;
   @override
-  String get updatedAt => throw _privateConstructorUsedError;
+  String get updatedAt;
   @override
-  String get title => throw _privateConstructorUsedError;
+  String get title;
   @override
-  String get body => throw _privateConstructorUsedError;
+  String get body;
   @override
-  List<String>? get tagList => throw _privateConstructorUsedError;
+  List<String>? get tagList;
   @override
-  String get coverImage => throw _privateConstructorUsedError;
+  String get coverImage;
   @override
-  Author get author => throw _privateConstructorUsedError;
+  Author get author;
   @override
-  List<Author> get favoritedBy => throw _privateConstructorUsedError;
+  List<Author> get favoritedBy;
   @override
-  int get favoriteCount => throw _privateConstructorUsedError;
+  int get favoriteCount;
   @override
-  bool get favorited => throw _privateConstructorUsedError;
+  bool get favorited;
   @override
   @JsonKey(ignore: true)
   _$$_ArticleResponseModelCopyWith<_$_ArticleResponseModel> get copyWith =>
@@ -614,7 +616,9 @@ class _$_Author implements _Author {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AuthorToJson(this);
+    return _$$_AuthorToJson(
+      this,
+    );
   }
 }
 
@@ -631,21 +635,21 @@ abstract class _Author implements Author {
   factory _Author.fromJson(Map<String, dynamic> json) = _$_Author.fromJson;
 
   @override
-  int get id => throw _privateConstructorUsedError;
+  int get id;
   @override
   @FieldRename.snake
-  String get createdAt => throw _privateConstructorUsedError;
+  String get createdAt;
   @override
   @FieldRename.snake
-  String get updatedAt => throw _privateConstructorUsedError;
+  String get updatedAt;
   @override
-  String get username => throw _privateConstructorUsedError;
+  String get username;
   @override
-  String get email => throw _privateConstructorUsedError;
+  String get email;
   @override
-  String get bio => throw _privateConstructorUsedError;
+  String get bio;
   @override
-  String get image => throw _privateConstructorUsedError;
+  String get image;
   @override
   @JsonKey(ignore: true)
   _$$_AuthorCopyWith<_$_Author> get copyWith =>

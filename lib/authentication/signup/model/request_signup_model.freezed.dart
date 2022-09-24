@@ -161,7 +161,9 @@ class _$_RequestSignupModel implements _RequestSignupModel {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_RequestSignupModelToJson(this);
+    return _$$_RequestSignupModelToJson(
+      this,
+    );
   }
 }
 
@@ -175,11 +177,11 @@ abstract class _RequestSignupModel implements RequestSignupModel {
       _$_RequestSignupModel.fromJson;
 
   @override
-  String get username => throw _privateConstructorUsedError;
+  String get username;
   @override
-  String get email => throw _privateConstructorUsedError;
+  String get email;
   @override
-  String get password => throw _privateConstructorUsedError;
+  String get password;
   @override
   @JsonKey(ignore: true)
   _$$_RequestSignupModelCopyWith<_$_RequestSignupModel> get copyWith =>

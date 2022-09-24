@@ -145,7 +145,9 @@ class _$_RequestLoginModel implements _RequestLoginModel {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_RequestLoginModelToJson(this);
+    return _$$_RequestLoginModelToJson(
+      this,
+    );
   }
 }
 
@@ -158,9 +160,9 @@ abstract class _RequestLoginModel implements RequestLoginModel {
       _$_RequestLoginModel.fromJson;
 
   @override
-  String get email => throw _privateConstructorUsedError;
+  String get email;
   @override
-  String get password => throw _privateConstructorUsedError;
+  String get password;
   @override
   @JsonKey(ignore: true)
   _$$_RequestLoginModelCopyWith<_$_RequestLoginModel> get copyWith =>

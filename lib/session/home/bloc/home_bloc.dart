@@ -10,16 +10,16 @@ part 'home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc({required this.articleRepo}) : super(const HomeState.loading()) {
-    on<HomeEvent>((event, _) {
+    on<HomeEvent>((event, emit) {
       event.when(
-        getArticle: _onGetArticle,
+        getArticle: () => _onGetArticle(emit),
       );
     });
   }
 
   final ArticleRepository articleRepo;
 
-  Future<void> _onGetArticle() async {
+  Future<void> _onGetArticle(Emitter<HomeState> emit) async {
     emit(const HomeState.loading());
     try {
       final article = await articleRepo.getArticles();

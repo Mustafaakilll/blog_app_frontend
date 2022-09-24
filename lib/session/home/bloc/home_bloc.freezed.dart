@@ -527,7 +527,7 @@ abstract class _Success implements HomeState {
   const factory _Success({required final List<ArticleResponseModel> articles}) =
       _$_Success;
 
-  List<ArticleResponseModel> get articles => throw _privateConstructorUsedError;
+  List<ArticleResponseModel> get articles;
   @JsonKey(ignore: true)
   _$$_SuccessCopyWith<_$_Success> get copyWith =>
       throw _privateConstructorUsedError;
@@ -810,7 +810,7 @@ class _$_LoadFail implements _LoadFail {
 abstract class _LoadFail implements HomeState {
   const factory _LoadFail({required final String exception}) = _$_LoadFail;
 
-  String get exception => throw _privateConstructorUsedError;
+  String get exception;
   @JsonKey(ignore: true)
   _$$_LoadFailCopyWith<_$_LoadFail> get copyWith =>
       throw _privateConstructorUsedError;
@@ -967,7 +967,7 @@ class _$_LikeFail implements _LikeFail {
 abstract class _LikeFail implements HomeState {
   const factory _LikeFail({required final String exception}) = _$_LikeFail;
 
-  String get exception => throw _privateConstructorUsedError;
+  String get exception;
   @JsonKey(ignore: true)
   _$$_LikeFailCopyWith<_$_LikeFail> get copyWith =>
       throw _privateConstructorUsedError;

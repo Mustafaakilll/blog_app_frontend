@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'authentication/auth_flow/authentication_cubit.dart';
 import 'authentication/login/view/login_view.dart';
 import 'session/navigator/view/session_navigator.dart';
-import 'splash/splash_view.dart';
 import 'utils/utils.dart';
 
 class MyApp extends StatelessWidget {
@@ -22,18 +21,19 @@ class MyApp extends StatelessWidget {
       ),
       builder: (_, child) {
         return BlocListener<AuthenticationCubit, AuthenticationState>(
-          listener: (_, state) {
-            state.whenOrNull(
-              authenticated: () =>
-                  AppConstants.navKey.currentState?.pushAndRemoveUntil(SessionNavigator.route(), (route) => false),
-              unauthenticated: () =>
-                  AppConstants.navKey.currentState?.pushAndRemoveUntil(LoginView.route(), (route) => false),
-            );
+          listener: (context, state) {
+            state.mapOrNull(
+              authenticated: (value) => AppConstants.navKey.currentState!.pushAndRemoveUntil(
+                SessionNavigator.route(),
+                (route) => false,
+              ),
+              unauthenticated: (value) => const LoginView(),
+            )!;
           },
           child: child,
         );
       },
-      onGenerateRoute: (_) => SplashView.route(),
+      onGenerateRoute: (_) => LoginView.route(),
     );
   }
 }

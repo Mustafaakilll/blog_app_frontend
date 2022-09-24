@@ -15,12 +15,12 @@ part 'profile_state.dart';
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   ProfileBloc({required this.picker, required this.userRepo, required this.storageRepo})
       : super(const ProfileState.fetching()) {
-    on<ProfileEvent>(((event, _) {
+    on<ProfileEvent>(((event, emit) {
       event.when(
-        fetch: _onFetchUser,
-        followUser: _onFollowUser,
-        unfollowUser: _onUnfollowUser,
-        pickImage: _onPickImage,
+        fetch: () => _onFetchUser(emit),
+        followUser: (username) => _onFollowUser(username, emit),
+        unfollowUser: (username) => _onUnfollowUser(username, emit),
+        pickImage: () => _onPickImage(emit),
       );
     }));
   }
@@ -32,7 +32,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
 
   UserModel get user => _user;
 
-  Future<void> _onFetchUser() async {
+  Future<void> _onFetchUser(Emitter<ProfileState> emit) async {
     emit(const ProfileState.fetching());
     try {
       final userInfo = await storageRepo.getData<Map<dynamic, dynamic>>('user');
@@ -43,7 +43,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     }
   }
 
-  Future<void> _onFollowUser(String username) async {
+  Future<void> _onFollowUser(String username, Emitter<ProfileState> emit) async {
     try {
       final user = await userRepo.followUser(username);
       emit(ProfileState.followSuccess(user: user));
@@ -52,7 +52,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     }
   }
 
-  Future<void> _onUnfollowUser(String username) async {
+  Future<void> _onUnfollowUser(String username, Emitter<ProfileState> emit) async {
     try {
       final user = await userRepo.unfollowUser(username);
       emit(ProfileState.followSuccess(user: user));
@@ -61,8 +61,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     }
   }
 
-  Future<void> _onPickImage() async {
-    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+  Future<void> _onPickImage(Emitter<ProfileState> emit) async {
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
     if (pickedFile == null) return;
     emit(ProfileState.pickImage(imageUrl: pickedFile.path));
   }

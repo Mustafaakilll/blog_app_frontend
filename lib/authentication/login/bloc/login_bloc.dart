@@ -12,11 +12,11 @@ part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc({required this.authenticationCubit, required this.authRepository}) : super(const LoginState.initial()) {
-    on<LoginEvent>((event, _) {
+    on<LoginEvent>((event, emit) {
       event.when(
-        emailChanged: _onEmailChanged,
-        passwordChanged: _onPasswordChanged,
-        formSubmit: _onFormSubmitted,
+        emailChanged: (email) => _onEmailChanged(email, emit),
+        passwordChanged: (password) => _onPasswordChanged(password, emit),
+        formSubmit: () => _onFormSubmitted(emit),
       );
     });
   }
@@ -24,15 +24,15 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final AuthRepository authRepository;
   final AuthenticationCubit authenticationCubit;
 
-  void _onEmailChanged(String email) {
+  void _onEmailChanged(String email, Emitter<LoginState> emit) {
     emit(state.copyWith(email: email));
   }
 
-  void _onPasswordChanged(String password) {
+  void _onPasswordChanged(String password, Emitter<LoginState> emit) {
     emit(state.copyWith(password: password));
   }
 
-  Future<void> _onFormSubmitted() async {
+  Future<void> _onFormSubmitted(Emitter<LoginState> emit) async {
     emit(state.copyWith(formStatus: const FormSubmitting()));
     try {
       await authRepository.login(RequestLoginModel(email: state.email, password: state.password));

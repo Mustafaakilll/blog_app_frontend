@@ -245,7 +245,7 @@ class _$_TitleChanged with DiagnosticableTreeMixin implements _TitleChanged {
 abstract class _TitleChanged implements AddArticleEvent {
   const factory _TitleChanged(final String title) = _$_TitleChanged;
 
-  String get title => throw _privateConstructorUsedError;
+  String get title;
   @JsonKey(ignore: true)
   _$$_TitleChangedCopyWith<_$_TitleChanged> get copyWith =>
       throw _privateConstructorUsedError;
@@ -410,7 +410,7 @@ abstract class _DescriptionChanged implements AddArticleEvent {
   const factory _DescriptionChanged(final String description) =
       _$_DescriptionChanged;
 
-  String get description => throw _privateConstructorUsedError;
+  String get description;
   @JsonKey(ignore: true)
   _$$_DescriptionChangedCopyWith<_$_DescriptionChanged> get copyWith =>
       throw _privateConstructorUsedError;
@@ -574,7 +574,7 @@ class _$_TagsChanged with DiagnosticableTreeMixin implements _TagsChanged {
 abstract class _TagsChanged implements AddArticleEvent {
   const factory _TagsChanged(final List<String> tags) = _$_TagsChanged;
 
-  List<String> get tags => throw _privateConstructorUsedError;
+  List<String> get tags;
   @JsonKey(ignore: true)
   _$$_TagsChangedCopyWith<_$_TagsChanged> get copyWith =>
       throw _privateConstructorUsedError;
@@ -615,7 +615,7 @@ class _$_OpenImagePicker
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'AddArticleEvent.openImagePicker'));
+        .add(DiagnosticsProperty('type', 'AddArticleEvent.openImagePicker'));
   }
 
   @override
@@ -744,7 +744,7 @@ class _$_AddArticle with DiagnosticableTreeMixin implements _AddArticle {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties..add(DiagnosticsProperty('type', 'AddArticleEvent.addArticle'));
+    properties.add(DiagnosticsProperty('type', 'AddArticleEvent.addArticle'));
   }
 
   @override
@@ -1150,15 +1150,15 @@ abstract class _Initial implements AddArticleState {
       final List<String> tags}) = _$_Initial;
 
   @override
-  String? get title => throw _privateConstructorUsedError;
+  String? get title;
   @override
-  String? get description => throw _privateConstructorUsedError;
+  String? get description;
   @override
-  String? get coverImage => throw _privateConstructorUsedError;
+  String? get coverImage;
   @override
-  FormStatus get formStatus => throw _privateConstructorUsedError;
+  FormStatus get formStatus;
   @override
-  List<String> get tags => throw _privateConstructorUsedError;
+  List<String> get tags;
   @override
   @JsonKey(ignore: true)
   _$$_InitialCopyWith<_$_Initial> get copyWith =>

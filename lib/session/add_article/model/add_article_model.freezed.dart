@@ -184,7 +184,9 @@ class _$_AddArticleModel implements _AddArticleModel {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AddArticleModelToJson(this);
+    return _$$_AddArticleModelToJson(
+      this,
+    );
   }
 }
 
@@ -196,13 +198,13 @@ abstract class _AddArticleModel implements AddArticleModel {
       _$_AddArticleModel.fromJson;
 
   @override
-  String get title => throw _privateConstructorUsedError;
+  String get title;
   @override
-  String get body => throw _privateConstructorUsedError;
+  String get body;
   @override
-  List<String> get tagList => throw _privateConstructorUsedError;
+  List<String> get tagList;
   @override
-  String get coverImage => throw _privateConstructorUsedError;
+  String get coverImage;
   @override
   @JsonKey(ignore: true)
   _$$_AddArticleModelCopyWith<_$_AddArticleModel> get copyWith =>

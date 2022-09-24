@@ -237,7 +237,7 @@ class _$_UsernameChanged implements _UsernameChanged {
 abstract class _UsernameChanged implements EditProfileEvent {
   const factory _UsernameChanged(final String username) = _$_UsernameChanged;
 
-  String get username => throw _privateConstructorUsedError;
+  String get username;
   @JsonKey(ignore: true)
   _$$_UsernameChangedCopyWith<_$_UsernameChanged> get copyWith =>
       throw _privateConstructorUsedError;
@@ -389,7 +389,7 @@ class _$_BioChanged implements _BioChanged {
 abstract class _BioChanged implements EditProfileEvent {
   const factory _BioChanged(final String bio) = _$_BioChanged;
 
-  String get bio => throw _privateConstructorUsedError;
+  String get bio;
   @JsonKey(ignore: true)
   _$$_BioChangedCopyWith<_$_BioChanged> get copyWith =>
       throw _privateConstructorUsedError;
@@ -541,7 +541,7 @@ class _$_EmailChanged implements _EmailChanged {
 abstract class _EmailChanged implements EditProfileEvent {
   const factory _EmailChanged(final String email) = _$_EmailChanged;
 
-  String get email => throw _privateConstructorUsedError;
+  String get email;
   @JsonKey(ignore: true)
   _$$_EmailChangedCopyWith<_$_EmailChanged> get copyWith =>
       throw _privateConstructorUsedError;
@@ -825,7 +825,7 @@ class _$_SaveUser implements _SaveUser {
 abstract class _SaveUser implements EditProfileEvent {
   const factory _SaveUser(final EditProfileModel data) = _$_SaveUser;
 
-  EditProfileModel get data => throw _privateConstructorUsedError;
+  EditProfileModel get data;
   @JsonKey(ignore: true)
   _$$_SaveUserCopyWith<_$_SaveUser> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1121,15 +1121,15 @@ abstract class _Initial implements EditProfileState {
       final FormStatus formStatus}) = _$_Initial;
 
   @override
-  String? get username => throw _privateConstructorUsedError;
+  String? get username;
   @override
-  String? get bio => throw _privateConstructorUsedError;
+  String? get bio;
   @override
-  String? get email => throw _privateConstructorUsedError;
+  String? get email;
   @override
-  String? get imagePath => throw _privateConstructorUsedError;
+  String? get imagePath;
   @override
-  FormStatus get formStatus => throw _privateConstructorUsedError;
+  FormStatus get formStatus;
   @override
   @JsonKey(ignore: true)
   _$$_InitialCopyWith<_$_Initial> get copyWith =>

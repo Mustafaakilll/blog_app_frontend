@@ -162,7 +162,9 @@ class _$_EditProfileModel implements _EditProfileModel {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_EditProfileModelToJson(this);
+    return _$$_EditProfileModelToJson(
+      this,
+    );
   }
 }
 
@@ -176,11 +178,11 @@ abstract class _EditProfileModel implements EditProfileModel {
       _$_EditProfileModel.fromJson;
 
   @override // required String username,
-  String get email => throw _privateConstructorUsedError;
+  String get email;
   @override
-  String get bio => throw _privateConstructorUsedError;
+  String get bio;
   @override
-  String? get image => throw _privateConstructorUsedError;
+  String? get image;
   @override
   @JsonKey(ignore: true)
   _$$_EditProfileModelCopyWith<_$_EditProfileModel> get copyWith =>

@@ -260,7 +260,9 @@ class _$_ResponseSignupModel implements _ResponseSignupModel {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ResponseSignupModelToJson(this);
+    return _$$_ResponseSignupModelToJson(
+      this,
+    );
   }
 }
 
@@ -279,21 +281,21 @@ abstract class _ResponseSignupModel implements ResponseSignupModel {
       _$_ResponseSignupModel.fromJson;
 
   @override
-  int get id => throw _privateConstructorUsedError;
+  int get id;
   @override
-  String get createdAt => throw _privateConstructorUsedError;
+  String get createdAt;
   @override
-  String get updatedAt => throw _privateConstructorUsedError;
+  String get updatedAt;
   @override
-  String get username => throw _privateConstructorUsedError;
+  String get username;
   @override
-  String get email => throw _privateConstructorUsedError;
+  String get email;
   @override
-  String? get password => throw _privateConstructorUsedError;
+  String? get password;
   @override
-  String get bio => throw _privateConstructorUsedError;
+  String get bio;
   @override
-  String get image => throw _privateConstructorUsedError;
+  String get image;
   @override
   @JsonKey(ignore: true)
   _$$_ResponseSignupModelCopyWith<_$_ResponseSignupModel> get copyWith =>
