@@ -9,6 +9,7 @@ import '../../authentication/login/bloc/login_bloc.dart';
 import '../../authentication/signup/bloc/signup_bloc.dart';
 import '../../session/add_article/bloc/add_article_bloc.dart';
 import '../../session/article_repository.dart';
+import '../../session/edit_profile/bloc/edit_profile_bloc.dart';
 import '../../session/home/bloc/home_bloc.dart';
 import '../../session/navigator/bloc/session_navigator_cubit.dart';
 import '../../session/profile/bloc/profile_bloc.dart';
@@ -27,6 +28,16 @@ void init() {
 
   locator.registerLazySingleton<ImagePicker>(() => ImagePicker());
 
+  // REPOSITORY
+  locator.registerLazySingleton<AuthRepository>(() => AuthRepository(dio: authDio, storageRepo: locator()));
+  locator.registerLazySingleton<StorageRepository>(() => StorageRepository());
+  locator.registerLazySingleton<UserRepository>(
+    () => UserRepository(userDio: userDio, storageRepo: locator(), cloudinaryDio: cloudinaryDio),
+  );
+  locator.registerLazySingleton<ArticleRepository>(
+    () => ArticleRepository(articleDio: articleDio, storageRepo: locator(), cloudinaryDio: cloudinaryDio),
+  );
+
   // CUBITS
   locator.registerFactory<AuthenticationCubit>(() => AuthenticationCubit(authRepository: locator()));
   locator.registerFactory<SessionNavigatorCubit>(() => SessionNavigatorCubit());
@@ -42,14 +53,8 @@ void init() {
   locator
       .registerFactory<ProfileBloc>(() => ProfileBloc(storageRepo: locator(), userRepo: locator(), picker: locator()));
   locator.registerFactory<HomeBloc>(() => HomeBloc(articleRepo: locator()));
-
-  // REPOSITORY
-  locator.registerLazySingleton<AuthRepository>(() => AuthRepository(dio: authDio, storageRepo: locator()));
-  locator.registerLazySingleton<StorageRepository>(() => StorageRepository());
-  locator.registerLazySingleton<UserRepository>(
-    () => UserRepository(userDio: userDio, storageRepo: locator(), cloudinaryDio: cloudinaryDio),
-  );
-  locator.registerLazySingleton<ArticleRepository>(
-    () => ArticleRepository(articleDio: articleDio, storageRepo: locator(), cloudinaryDio: cloudinaryDio),
-  );
+  locator.registerFactory<EditProfileBloc>(() => EditProfileBloc(
+        picker: locator(),
+        userRepo: locator(),
+      ));
 }
