@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import 'app.dart';
@@ -20,11 +19,13 @@ import 'utils/utils.dart';
 
 Future<void> main() async {
   ErrorWidget.builder = (details) => Center(child: Text(details.exception.toString()));
-  await dotenv.load();
   await Hive.initFlutter();
   init();
-  BlocOverrides.runZoned(() => runApp(const App()), blocObserver: MyBlocObserver());
+  Bloc.observer = MyBlocObserver();
+  runApp(const App());
+  // BlocOverrides.runZoned(() => runApp(const App()), blocObserver: MyBlocObserver());
   // TODO: ADD ANY ROUTER PACKAGE
+  // TODO: MAKE WIDGET FOR LOADING AND BUTTON PROCESS
 }
 
 class App extends StatelessWidget {
@@ -34,15 +35,15 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
       providers: [
-        RepositoryProvider(create: (_) => locator<StorageRepository>()),
-        RepositoryProvider(create: (_) => locator<ArticleRepository>()),
-        RepositoryProvider(create: (_) => locator<UserRepository>()),
-        RepositoryProvider(create: (_) => locator<AuthRepository>()),
+        RepositoryProvider<StorageRepository>(create: (_) => locator<StorageRepository>()),
+        RepositoryProvider<ArticleRepository>(create: (_) => locator<ArticleRepository>()),
+        RepositoryProvider<UserRepository>(create: (_) => locator<UserRepository>()),
+        RepositoryProvider<AuthRepository>(create: (_) => locator<AuthRepository>()),
       ],
       child: MultiBlocProvider(
         providers: [
-          BlocProvider(create: (_) => locator<AuthenticationCubit>()),
-          BlocProvider(create: (_) => locator<SessionNavigatorCubit>()),
+          BlocProvider<AuthenticationCubit>(create: (_) => locator<AuthenticationCubit>()),
+          BlocProvider<SessionNavigatorCubit>(create: (_) => locator<SessionNavigatorCubit>()),
           BlocProvider<LoginBloc>(create: (_) => locator<LoginBloc>()),
           BlocProvider<SignupBloc>(create: (_) => locator<SignupBloc>()),
           BlocProvider<AddArticleBloc>(create: (_) => locator<AddArticleBloc>()),

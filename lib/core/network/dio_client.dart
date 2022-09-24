@@ -1,28 +1,27 @@
 import 'package:dio/dio.dart' hide LogInterceptor;
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 
+import '../env/env.dart';
 import 'interceptors/auth_interceptor.dart';
 
 class BaseDioClient {
   BaseDioClient.auth() {
-    _dio.options.baseUrl = dotenv.get('AUTH_ENDPOINT');
+    _dio.options.baseUrl = Env.authEndpoint;
   }
 
   BaseDioClient.user() {
     _dio.interceptors.add(AuthInterceptor());
-    _dio.options.baseUrl = dotenv.get('USER_ENDPOINT');
+    _dio.options.baseUrl = Env.userEndpoint;
   }
 
   BaseDioClient.article() {
     _dio.interceptors.add(AuthInterceptor());
-
-    _dio.options.baseUrl = dotenv.get('ARTICLE_ENDPOINT');
+    _dio.options.baseUrl = Env.articleEndpoint;
   }
 
   BaseDioClient.cloudinary() {
     _dio.interceptors.add(AuthInterceptor());
-    final cloudinaryUrl = dotenv.get('CLOUDINARY_URL');
-    final cloudName = dotenv.get('CLOUD_NAME');
+    final cloudinaryUrl = Env.cloudinaryUrl;
+    final cloudName = Env.cloudName;
     _dio.options.baseUrl = '$cloudinaryUrl$cloudName';
   }
 
